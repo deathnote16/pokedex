@@ -1,9 +1,10 @@
-const democonfig = {
-  key: "demo",
+import storage from 'redux-persist/lib/storage';
+const demoConfig = {
+  key: 'demo',
   storage,
-  whitelist: ["hello"],
+  whitelist: ['hello']
 };
 
 export const persistConfig = {
-  democonfig,
+  demoConfig
 };

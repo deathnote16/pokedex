@@ -1,16 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 type State = {
   hello: string;
 };
 
 const initialState: State = {
-  hello: "Hellow World",
+  hello: 'Hellow World'
 };
 
 const slice = createSlice({
-  name: "demo_slice",
+  name: 'demo_slice',
   initialState,
-  reducers: {},
+  reducers: {}
 });
 
 //This are the things we need reducer and actions
