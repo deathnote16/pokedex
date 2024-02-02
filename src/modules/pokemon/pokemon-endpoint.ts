@@ -3,18 +3,18 @@ import { PokedexResponse, PokemonPayload } from './types';
 
 export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
   endpoints: (builder) => ({
-    getPokemonList: builder.query<PokedexResponse, PokemonPayload>({
+    getPokemonList: builder.query<any, PokemonPayload>({
       query(data) {
         return {
           url: 'pokemon',
-          params: { limit: data?.limit },
+          params: { limit: data?.limit, offset: data?.offset },
           method: `GET`,
-          body: {},
           header: {}
         };
       }
     }),
-    getPokemonDetails: builder.mutation<any, PokemonPayload>({
+
+    getPokemonDetails: builder.query<any, PokemonPayload>({
       query(data) {
         return {
           url: `pokemon/${data?.name}`,
@@ -27,5 +27,21 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
         };
       }
     })
+    //TODO:mutation is for sending updates to the server
+    // getPokemonDetails: builder.mutation<any, PokemonPayload>({
+    //   query(data) {
+    //     return {
+    //       url: `pokemon/${data?.name}`,
+    //       params: {
+    //         limit: data?.limit
+    //       },
+    //       method: `GET`,
+    //       header: {}
+    //       // invalidatesTags: [`Post`]
+    //     };
+    //   }
+    // })
   })
 });
+
+export const { useGetPokemonListQuery } = extendedPokedexApiSlice;

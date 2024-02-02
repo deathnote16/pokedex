@@ -1,6 +1,7 @@
 export type PokemonPayload = {
   limit?: number;
   name?: string;
+  offset?: number;
 };
 export type PokedexResponse = {
   count: number;
