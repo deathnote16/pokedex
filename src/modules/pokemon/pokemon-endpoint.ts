@@ -3,7 +3,7 @@ import { PokedexResponse, PokemonPayload } from './types';
 
 export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
   endpoints: (builder) => ({
-    getPokemonList: builder.query<any, PokemonPayload>({
+    getPokemonList: builder.query<PokedexResponse, PokemonPayload>({
       query(data) {
         return {
           url: 'pokemon',

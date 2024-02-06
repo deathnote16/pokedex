@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { CustomTheme } from 'component/theme';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -18,7 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <Component {...pageProps} />
+          <CustomTheme>
+            <Component {...pageProps} />
+          </CustomTheme>
         </PersistGate>
       </Provider>
     </>
