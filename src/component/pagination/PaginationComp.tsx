@@ -11,7 +11,8 @@ const FlexBox = styled(Paper)(({ theme }) => ({
 }));
 
 const FontStyle = styled(Typography)(({ theme }) => ({
-  fontWeight: '900',
+  fontWeight: '600',
+  // fontVariant: '',
   [theme.breakpoints.up('xs')]: {
     fontSize: '8px'
   },
@@ -26,11 +27,11 @@ const Component: React.FC<Props> = ({ prevPage, nextPage }) => {
   return (
     <FlexBox>
       <Button onClick={prevPage}>
-        <FontStyle>{'PREVIOUS'}</FontStyle>
+        <FontStyle>{'Previous'}</FontStyle>
       </Button>
       <Divider orientation="vertical" variant="middle" flexItem />
       <Button onClick={nextPage}>
-        <FontStyle>{'NEXT'}</FontStyle>
+        <FontStyle>{'Next'}</FontStyle>
       </Button>
     </FlexBox>
   );
