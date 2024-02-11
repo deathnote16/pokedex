@@ -5,6 +5,7 @@ import { modules } from 'modules';
 import { PokemonListCard } from './PokemonListCard';
 import Link from 'next/link';
 import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
+import { PaginationPage } from 'component/pagination';
 
 const { useGetPokemonListQuery } = modules.pokemonModule;
 
@@ -16,11 +17,14 @@ const FlexBox = styled('div')({
   flexWrap: 'wrap'
 });
 
-type Props = {};
+type Props = {
+  offset?: number;
+};
 
-const Component: React.FC<Props> = () => {
+const Component: React.FC<Props> = ({ offset }) => {
+  const customHeight = '90vh';
   const { data, isSuccess, isFetching, isLoading, isError } =
-    useGetPokemonListQuery({ limit: 10000 });
+    useGetPokemonListQuery({ limit: 30, offset });
 
   return (
     <Paper
@@ -28,16 +32,20 @@ const Component: React.FC<Props> = () => {
         padding: 1,
         background: 'rgba(240, 240, 240, 0.5)',
         border: '10px solid black',
+        minHeight: customHeight,
         maxHeight: '90vh',
         overflowY: 'scroll'
       }}
     >
-      {isFetching || isLoading ? <PokeballLoaders /> : null}
-      {data?.results?.map((pokemon: any, index: number) => (
-        <Link key={index} href={''}>
-          <PokemonListCard index={index + 1} pokemonList={pokemon} />
-        </Link>
-      ))}
+      {isFetching || isLoading ? (
+        <PokeballLoaders height={customHeight} />
+      ) : (
+        data?.results?.map((pokemon, index) => (
+          <Link key={index} href={''}>
+            <PokemonListCard pokemonList={pokemon} />
+          </Link>
+        ))
+      )}
     </Paper>
   );
 };

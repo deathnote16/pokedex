@@ -1,6 +1,5 @@
 import { styled } from '@mui/system';
 import React from 'react';
-type Props = {};
 import Image from 'next/image';
 import pokeballLoading from './pokeballLoading.module.css';
 
@@ -11,9 +10,11 @@ const PokeContainer = styled('div')({
   alignItems: 'center'
 });
 
-const component: React.FC<Props> = ({}) => {
+type Props = { height?: string };
+
+const component: React.FC<Props> = ({ height }) => {
   return (
-    <PokeContainer>
+    <PokeContainer sx={{ minHeight: height }}>
       <Image
         src="/images/png/game.png"
         alt="pokeball-loading"

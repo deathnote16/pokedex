@@ -1,11 +1,24 @@
 import { Box, Button, Card, CardContent, Typography } from '@mui/material';
+import { styled } from '@mui/system';
 import { Pokemon } from 'modules/pokemon/types';
 import Image from 'next/image';
 import React from 'react';
 
-type Props = { pokemonList: Pokemon; index?: number };
+const ResponsiveButton = styled(Button)(({ theme }) => ({
+  [theme.breakpoints.up('xs')]: {
+    fontSize: '10px'
+  }
+}));
 
-const component: React.FC<Props> = ({ index, pokemonList }) => {
+const ResponsiveTypography = styled(Typography)(({ theme }) => ({
+  [theme.breakpoints.up('xs')]: {
+    fontSize: '12px'
+  }
+}));
+
+type Props = { pokemonList?: Pokemon };
+
+const component: React.FC<Props> = ({ pokemonList }) => {
   return (
     <Card variant="outlined" sx={{ marginTop: 1 }}>
       <Box
@@ -29,21 +42,13 @@ const component: React.FC<Props> = ({ index, pokemonList }) => {
             height={25}
             alt={'poke-ball'}
           />
-          <Typography
-            marginRight={1}
-            fontWeight={'bold'}
-            fontSize={'14px'}
-            ml={1}
-          >
-            {index}
-          </Typography>
-          <Typography fontWeight={'bold'} fontSize={'14px'}>
+          <ResponsiveTypography fontWeight={'bold'} fontSize={'14px'} ml={1}>
             {pokemonList?.name.toUpperCase()}
-          </Typography>
+          </ResponsiveTypography>
         </Box>
-        <Button variant="contained" color="primary" size="small">
+        <ResponsiveButton variant="contained" color="primary" size="small">
           Details
-        </Button>
+        </ResponsiveButton>
       </Box>
     </Card>
   );
