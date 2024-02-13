@@ -19,12 +19,19 @@ const FlexBox = styled('div')({
 
 type Props = {
   offset?: number;
+  onClickPokemonDetils: (pokemonName: string) => void;
 };
 
-const Component: React.FC<Props> = ({ offset }) => {
+const Component: React.FC<Props> = ({ offset, onClickPokemonDetils }) => {
   const customHeight = '90vh';
   const { data, isSuccess, isFetching, isLoading, isError } =
     useGetPokemonListQuery({ limit: 30, offset });
+
+  const handleClick = (pokemon?: string) => {
+    if (pokemon) {
+      onClickPokemonDetils(pokemon);
+    }
+  };
 
   return (
     <Paper
@@ -41,9 +48,12 @@ const Component: React.FC<Props> = ({ offset }) => {
         <PokeballLoaders height={customHeight} />
       ) : (
         data?.results?.map((pokemon, index) => (
-          <Link key={index} href={''}>
+          <Box
+            key={pokemon?.name}
+            onClick={() => handleClick(pokemon.name ?? pokemon.name)}
+          >
             <PokemonListCard pokemonList={pokemon} />
-          </Link>
+          </Box>
         ))
       )}
     </Paper>

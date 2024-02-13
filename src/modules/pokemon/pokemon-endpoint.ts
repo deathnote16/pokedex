@@ -1,12 +1,17 @@
 import { pokemonApi } from 'app/apiSlice';
-import { PokedexResponse, PokemonPayload } from './types';
+import {
+  PokedexResponse,
+  PokemonDetailsPayload,
+  PokemonDetailsResponse,
+  PokemonPayload
+} from './types';
 
 export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
   endpoints: (builder) => ({
     getPokemonList: builder.query<PokedexResponse, PokemonPayload>({
       query(data) {
         return {
-          url: 'pokemon',
+          url: 'https://pokeapi.co/api/v2/pokemon',
           params: { limit: data?.limit, offset: data?.offset },
           method: `GET`,
           header: {}
@@ -14,13 +19,16 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
       }
     }),
 
-    getPokemonDetails: builder.query<any, PokemonPayload>({
+    getPokemonDetails: builder.query<
+      PokemonDetailsResponse,
+      PokemonDetailsPayload
+    >({
       query(data) {
         return {
-          url: `pokemon/${data?.name}`,
-          params: {
-            limit: data?.limit
-          },
+          url: data.url || '',
+          // params: {
+          // limit: data?.limit
+          // },
           method: `GET`,
           header: {}
           // invalidatesTags: [`Post`]
@@ -44,4 +52,5 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
   })
 });
 
-export const { useGetPokemonListQuery } = extendedPokedexApiSlice;
+export const { useGetPokemonListQuery, useGetPokemonDetailsQuery } =
+  extendedPokedexApiSlice;
