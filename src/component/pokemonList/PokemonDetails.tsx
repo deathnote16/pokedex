@@ -3,6 +3,7 @@ import { Box, Card, CardContent, Paper, Typography } from '@mui/material';
 import { modules } from 'modules';
 import { padding } from '@mui/system';
 import { PokeHeader } from './PokeDetailsHeader';
+import { PokemonSprite } from './PokemonSprite';
 
 const { useGetPokemonDetailsQuery } = modules.pokemonModule;
 
@@ -16,17 +17,20 @@ const Component: React.FC<Props> = ({ pokemonName }) => {
     isLoading,
     isFetching
   } = useGetPokemonDetailsQuery({
-    url: `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`
+    url: `https://pokeapi.co/api/v2/pokemon/${pokemonName || ''}/`
   });
 
-  if (isLoading || isFetching) {
-    return <Typography>{`Is loading....`}</Typography>;
-  }
   return (
     <Paper elevation={1} sx={{ padding: 1 }}>
-      <Card sx={{ p: 3 }}>
-        <PokeHeader pokeId={pokeDetails?.id} pokeName={pokeDetails?.name} />
-      </Card>
+      <PokeHeader
+        pokemonSpriteIcon={pokeDetails?.sprites?.front_default}
+        pokeId={pokeDetails?.id}
+        pokeName={pokeDetails?.name}
+      />
+      <PokemonSprite
+        loading={isLoading || isFetching}
+        imgSourceLink={pokeDetails?.sprites}
+      />
     </Paper>
   );
 };

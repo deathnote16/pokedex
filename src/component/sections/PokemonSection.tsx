@@ -8,8 +8,6 @@ import { usePagination } from 'hook';
 import { modules } from 'modules';
 import React, { useState } from 'react';
 
-const { useGetPokemonDetailsQuery } = modules.pokemonModule;
-
 const FlexCenter = styled(Box)({
   display: 'flex',
   justifyContent: 'center',
@@ -22,10 +20,10 @@ const Component = () => {
 
   return (
     <Grid container spacing={1} mt={1} mb={1}>
-      <Grid item xs={12} md={7}>
+      <Grid item xs={12} md={8}>
         <PokemonDetails pokemonName={pokemonDetails} />
       </Grid>
-      <Grid item xs={12} md={5}>
+      <Grid item xs={12} md={4}>
         <PokemonList
           offset={currentPage}
           onClickPokemonDetils={(pokemonName?: string) =>

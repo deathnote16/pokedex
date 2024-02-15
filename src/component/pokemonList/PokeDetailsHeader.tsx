@@ -1,22 +1,44 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
-import { modules } from 'modules';
+import { Avatar, Box, Card, Typography } from '@mui/material';
+
+const backgroundStyle = {
+  backgroundImage: `url(/images/icon/pokeball_icon2.png)`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center'
+};
 
 type Props = {
+  pokemonSpriteIcon?: string;
   pokeId?: number;
   pokeName?: string;
 };
 
-const Component: React.FC<Props> = ({ pokeId, pokeName }) => {
+const Component: React.FC<Props> = ({
+  pokeId,
+  pokeName,
+  pokemonSpriteIcon
+}) => {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Typography mr={1} fontWeight={900}>
-        {`#${pokeId}` || '--'}
-      </Typography>
-      <Typography fontWeight={900}>
-        {pokeName?.toUpperCase() || '--'}
-      </Typography>
-    </Box>
+    <Card sx={{ p: 1 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        {pokemonSpriteIcon ? (
+          <Avatar
+            alt="pokemon-icon"
+            src={pokemonSpriteIcon}
+            sx={{ ...backgroundStyle, mr: 1, width: 50, height: 50 }}
+          />
+        ) : (
+          <Box sx={{ ...backgroundStyle, width: 50, height: 50, mr: 1 }} />
+        )}
+
+        <Typography mr={1} fontWeight={900}>
+          {pokeId ? `#${pokeId}` : '--'}
+        </Typography>
+        <Typography fontWeight={900}>
+          {pokeName?.toUpperCase() || '--'}
+        </Typography>
+      </Box>
+    </Card>
   );
 };
 

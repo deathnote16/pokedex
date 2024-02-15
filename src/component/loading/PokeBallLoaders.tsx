@@ -8,18 +8,21 @@ const PokeContainer = styled('div')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center'
+  // maxWidth: '100%',
+  // height: 'auto'
 });
 
-type Props = { height?: string };
+type Props = { height?: string; dimension?: number; imgSrc: string };
 
-const component: React.FC<Props> = ({ height }) => {
+const component: React.FC<Props> = ({ imgSrc, height, dimension }) => {
   return (
     <PokeContainer sx={{ minHeight: height }}>
       <Image
-        src="/images/png/game.png"
+        // src="/images/png/game.png"
+        src={imgSrc}
         alt="pokeball-loading"
-        width={70}
-        height={70}
+        width={dimension || 70}
+        height={dimension || 70}
         className={pokeballLoading.spinPokeballEl}
       />
     </PokeContainer>

@@ -45,7 +45,11 @@ const Component: React.FC<Props> = ({ offset, onClickPokemonDetils }) => {
       }}
     >
       {isFetching || isLoading ? (
-        <PokeballLoaders height={customHeight} />
+        <PokeballLoaders
+          imgSrc={`/images/png/game.png`}
+          height={customHeight}
+          dimension={120}
+        />
       ) : (
         data?.results?.map((pokemon, index) => (
           <Box
