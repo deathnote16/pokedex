@@ -15,7 +15,7 @@ const Component: FC<Props> = ({ children }) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       {/* TODO: add navigation here */}
-      <Container maxWidth="xl">{children}</Container>
+      <Container maxWidth="lg">{children}</Container>
     </Fragment>
   );
 };

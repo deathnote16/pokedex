@@ -29,7 +29,7 @@ const Component: React.FC<Props> = ({ imgSourceLink, loading }) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        border: '12px solid black'
+        border: '5px solid gray'
       }}
       elevation={1}
     >
@@ -44,12 +44,12 @@ const Component: React.FC<Props> = ({ imgSourceLink, loading }) => {
             height={500}
           />
         ) : (
-          <Box sx={{ ...boxStyle, height: 500 }}>
+          <Box sx={{ ...boxStyle, height: 300 }}>
             {loading ? (
               <PokeballLoaders
                 imgSrc={`/images/icon/pokeball_icon.png`}
                 height={'500'}
-                dimension={320}
+                dimension={200}
               />
             ) : null}
           </Box>

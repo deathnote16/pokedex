@@ -5,6 +5,7 @@ import {
   PokemonDetailsResponse,
   PokemonPayload
 } from './types';
+import { PokeAbilityResponse } from './pokeAbilitiyTypes';
 
 export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -26,12 +27,20 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
       query(data) {
         return {
           url: data.url || '',
-          // params: {
-          // limit: data?.limit
-          // },
           method: `GET`,
           header: {}
-          // invalidatesTags: [`Post`]
+        };
+      }
+    }),
+    getPokemonAbility: builder.query<
+      PokeAbilityResponse,
+      PokemonDetailsPayload
+    >({
+      query(data) {
+        return {
+          url: data.url || '',
+          method: `GET`,
+          header: {}
         };
       }
     })
@@ -52,5 +61,8 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
   })
 });
 
-export const { useGetPokemonListQuery, useGetPokemonDetailsQuery } =
-  extendedPokedexApiSlice;
+export const {
+  useGetPokemonListQuery,
+  useGetPokemonDetailsQuery,
+  useGetPokemonAbilityQuery
+} = extendedPokedexApiSlice;
