@@ -58,9 +58,7 @@ const Component: React.FC<Props> = ({
       }}
     >
       <FlexRowBox mb={0.5}>
-        <Typography fontWeight={700} mr={1}>
-          Type:
-        </Typography>
+        <Typography mr={1}>Type:</Typography>
         <ButtonGroup variant="contained">
           {pokemonType?.map((pokeType, index) => (
             <Button
@@ -70,8 +68,9 @@ const Component: React.FC<Props> = ({
               sx={{
                 backgroundColor: typeColor(pokeType?.type?.name),
                 fontWeight: 700,
-                fontSize: '14px',
-                height: '20px'
+                fontSize: '16px',
+                height: '20px',
+                color: 'white'
               }}
             >
               {capitalize(pokeType?.type?.name) ?? ''}
@@ -81,7 +80,7 @@ const Component: React.FC<Props> = ({
       </FlexRowBox>
       <Box>
         <FlexRowBox mb={0.5}>
-          <Typography fontWeight={700} mr={0.3}>{`Abilities:`}</Typography>
+          <Typography mr={0.3}>{`Abilities:`}</Typography>
           {pokeAbilities?.map((abilities, index) => (
             <Typography key={index} fontWeight={700}>{`| ${capitalize(
               abilities?.ability?.name

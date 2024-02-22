@@ -16,10 +16,6 @@ const component: FC<MuiThemeProps> = ({ children }) => {
       },
       secondary: {
         main: customColor.secondary.main
-      },
-      common: {
-        black: customColor.common.dark,
-        white: customColor.common.light
       }
     }
   });
