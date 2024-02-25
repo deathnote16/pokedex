@@ -31,10 +31,10 @@ const Component: React.FC<Props> = ({
           <Box sx={{ ...backgroundStyle, width: 50, height: 50, mr: 1 }} />
         )}
 
-        <Typography mr={1} fontWeight={900}>
+        <Typography mr={1} fontWeight={900} fontSize={'1.8em'}>
           {pokeId ? `#${pokeId}` : '--'}
         </Typography>
-        <Typography fontWeight={900}>
+        <Typography fontWeight={900} fontSize={'1.8rem'}>
           {pokeName?.toUpperCase() || '--'}
         </Typography>
       </Box>

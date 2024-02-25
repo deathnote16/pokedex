@@ -38,7 +38,7 @@ const Component: React.FC<Props> = ({ pokemonName }) => {
             imgSourceLink={pokeDetails?.sprites}
           />
         </Grid>
-        <Grid item sm={12} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <PokeGeneralInfo
             pokemonType={pokeDetails?.types}
             pokeAbilities={pokeDetails?.abilities}

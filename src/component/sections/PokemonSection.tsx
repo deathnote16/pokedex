@@ -19,7 +19,7 @@ const Component = () => {
   const [pokemonDetails, setPokemonDetails] = useState<string>();
 
   return (
-    <Grid container spacing={1} mt={1} mb={1}>
+    <Grid container spacing={2} mt={1} mb={1}>
       <Grid item xs={12} md={8}>
         <PokemonDetails pokemonName={pokemonDetails} />
       </Grid>

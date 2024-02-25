@@ -3,8 +3,14 @@ import {
   Button,
   ButtonGroup,
   Card,
+  Grid,
   IconButton,
   Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
   Tooltip,
   TooltipProps,
   Typography,
@@ -48,6 +54,15 @@ const Component: React.FC<Props> = ({
     return findTypeColor?.color;
   }, []);
 
+  const extractAbilities = useMemo(() => {
+    const arrayTypes = pokeAbilities
+      ?.map((ability) => {
+        return ability?.ability?.name?.toUpperCase();
+      })
+      .join(', ');
+    return arrayTypes;
+  }, [pokeAbilities]);
+
   return (
     <Card
       sx={{
@@ -57,7 +72,7 @@ const Component: React.FC<Props> = ({
         minHeight: '100px'
       }}
     >
-      <FlexRowBox mb={0.5}>
+      <FlexRowBox mb={'1vh'}>
         <Typography mr={1}>Type:</Typography>
         <ButtonGroup variant="contained">
           {pokemonType?.map((pokeType, index) => (
@@ -79,20 +94,20 @@ const Component: React.FC<Props> = ({
         </ButtonGroup>
       </FlexRowBox>
       <Box>
-        <FlexRowBox mb={0.5}>
-          <Typography mr={0.3}>{`Abilities:`}</Typography>
-          {pokeAbilities?.map((abilities, index) => (
-            <Typography key={index} fontWeight={700}>{`| ${capitalize(
-              abilities?.ability?.name
-            )} |`}</Typography>
-          ))}
+        <FlexRowBox mb={'1vh'}>
+          <Typography mr={1}>{`Abilities:`}</Typography>
+          <Typography fontWeight={700}>{extractAbilities}</Typography>
         </FlexRowBox>
-        <Typography fontWeight={700} mb={0.5}>{`Weight: ${fixKg(
-          weight || 0
-        )} kg`}</Typography>
-        <Typography fontWeight={700}>{`Height: ${convertDmToFoot(
-          height || 0
-        )} ft`}</Typography>
+        <FlexRowBox mb={'1vh'}>
+          <Typography sx={{ mr: 1 }}>{`Weight:`}</Typography>
+          <Typography fontWeight={700}>{`${fixKg(weight || 0)} kg`}</Typography>
+        </FlexRowBox>
+        <FlexRowBox>
+          <Typography sx={{ mr: 1 }}>{`Height:`}</Typography>
+          <Typography fontWeight={700}>{`${convertDmToFoot(
+            height || 0
+          )} ft`}</Typography>
+        </FlexRowBox>
       </Box>
     </Card>
   );
