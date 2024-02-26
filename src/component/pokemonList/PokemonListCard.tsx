@@ -1,34 +1,13 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  Typography
-} from '@mui/material';
+import React from 'react';
+import { Box, Button, Card, CardActionArea, Typography } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { styled } from '@mui/system';
 import { Pokemon } from 'modules/pokemon/types';
 import Image from 'next/image';
-import React from 'react';
+import { capitalize } from 'lodash';
+import { ResponsiveTypography } from 'component/typography';
 
-const ResponsiveButton = styled(Button)(({ theme }) => ({
-  fontSize: '14px',
-  [theme.breakpoints.up('xs')]: {
-    fontSize: '10px'
-  }
-}));
-
-const ResponsiveTypography = styled(Typography)(({ theme }) => ({
-  [theme.breakpoints.up('xs')]: {
-    fontSize: '12px'
-  },
-  [theme.breakpoints.up('md')]: {
-    fontSize: '16px'
-  }
-}));
-
-type Props = { pokemonList?: Pokemon };
+type Props = { pokemonList: Pokemon };
 
 const component: React.FC<Props> = ({ pokemonList }) => {
   return (
@@ -55,8 +34,8 @@ const component: React.FC<Props> = ({ pokemonList }) => {
               height={25}
               alt={'poke-ball'}
             />
-            <ResponsiveTypography fontWeight={'bold'} ml={1}>
-              {pokemonList?.name.toUpperCase()}
+            <ResponsiveTypography fontWeight={500} ml={1}>
+              {capitalize(pokemonList?.name) || ''}
             </ResponsiveTypography>
           </Box>
           <KeyboardArrowRightIcon />

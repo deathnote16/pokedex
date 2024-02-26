@@ -56,7 +56,7 @@ const Component: React.FC<Props> = ({ offset, onClickPokemonDetils }) => {
             key={pokemon?.name}
             onClick={() => handleClick(pokemon.name ?? pokemon.name)}
           >
-            <PokemonListCard pokemonList={pokemon} />
+            <PokemonListCard pokemonList={pokemon || {}} />
           </Box>
         ))
       )}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Avatar, Box, Card, Typography } from '@mui/material';
+import { ResponsiveTitle, ResponsiveTypography } from 'component/typography';
 
 const backgroundStyle = {
   backgroundImage: `url(/images/icon/pokeball_icon2.png)`,
@@ -31,12 +32,8 @@ const Component: React.FC<Props> = ({
           <Box sx={{ ...backgroundStyle, width: 50, height: 50, mr: 1 }} />
         )}
 
-        <Typography mr={1} fontWeight={900} fontSize={'1.8em'}>
-          {pokeId ? `#${pokeId}` : '--'}
-        </Typography>
-        <Typography fontWeight={900} fontSize={'1.8rem'}>
-          {pokeName?.toUpperCase() || '--'}
-        </Typography>
+        <ResponsiveTitle mr={1}>{pokeId ? `#${pokeId}` : '--'}</ResponsiveTitle>
+        <ResponsiveTitle>{pokeName?.toUpperCase() || '--'}</ResponsiveTitle>
       </Box>
     </Card>
   );

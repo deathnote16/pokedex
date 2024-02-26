@@ -24,6 +24,7 @@ import { styled } from '@mui/system';
 import { convertDmToFoot, fixKg } from 'utils';
 import { modules } from 'modules';
 import CloseIcon from '@mui/icons-material/Close';
+import { ResponsiveTypography } from 'component/typography';
 
 const { useGetPokemonAbilityQuery } = modules.pokemonModule;
 
@@ -57,7 +58,7 @@ const Component: React.FC<Props> = ({
   const extractAbilities = useMemo(() => {
     const arrayTypes = pokeAbilities
       ?.map((ability) => {
-        return ability?.ability?.name?.toUpperCase();
+        return capitalize(ability?.ability?.name);
       })
       .join(', ');
     return arrayTypes;
@@ -68,12 +69,12 @@ const Component: React.FC<Props> = ({
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        padding: '0.5rem',
+        padding: '1rem',
         minHeight: '100px'
       }}
     >
       <FlexRowBox mb={'1vh'}>
-        <Typography mr={1}>Type:</Typography>
+        <ResponsiveTypography mr={1}>Type:</ResponsiveTypography>
         <ButtonGroup variant="contained">
           {pokemonType?.map((pokeType, index) => (
             <Button
@@ -82,31 +83,40 @@ const Component: React.FC<Props> = ({
               size="small"
               sx={{
                 backgroundColor: typeColor(pokeType?.type?.name),
-                fontWeight: 700,
-                fontSize: '16px',
-                height: '20px',
-                color: 'white'
+                color: 'white',
+                paddingX: '1rem',
+                paddingY: '0.1rem'
               }}
             >
-              {capitalize(pokeType?.type?.name) ?? ''}
+              <ResponsiveTypography fontWeight={700}>
+                {pokeType?.type?.name ?? ''}
+              </ResponsiveTypography>
             </Button>
           ))}
         </ButtonGroup>
       </FlexRowBox>
       <Box>
         <FlexRowBox mb={'1vh'}>
-          <Typography mr={1}>{`Abilities:`}</Typography>
-          <Typography fontWeight={700}>{extractAbilities}</Typography>
+          <ResponsiveTypography mr={1}>{`Abilities:`}</ResponsiveTypography>
+          <ResponsiveTypography fontWeight={'bold'}>
+            {extractAbilities}
+          </ResponsiveTypography>
         </FlexRowBox>
         <FlexRowBox mb={'1vh'}>
-          <Typography sx={{ mr: 1 }}>{`Weight:`}</Typography>
-          <Typography fontWeight={700}>{`${fixKg(weight || 0)} kg`}</Typography>
+          <ResponsiveTypography
+            sx={{ mr: 1 }}
+          >{`Weight:`}</ResponsiveTypography>
+          <ResponsiveTypography fontWeight={700}>{`${fixKg(
+            weight || 0
+          )} kg`}</ResponsiveTypography>
         </FlexRowBox>
         <FlexRowBox>
-          <Typography sx={{ mr: 1 }}>{`Height:`}</Typography>
-          <Typography fontWeight={700}>{`${convertDmToFoot(
+          <ResponsiveTypography
+            sx={{ mr: 1 }}
+          >{`Height:`}</ResponsiveTypography>
+          <ResponsiveTypography fontWeight={700}>{`${convertDmToFoot(
             height || 0
-          )} ft`}</Typography>
+          )} ft`}</ResponsiveTypography>
         </FlexRowBox>
       </Box>
     </Card>
