@@ -34,7 +34,7 @@ const TestPage: FC<Props> = ({}) => {
       <Grid container>
         <Grid item md={7}></Grid>
         <Grid item md={5}>
-          <PokemonList />
+          {/* <PokemonList /> */}
         </Grid>
       </Grid>
     </Container>

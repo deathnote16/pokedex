@@ -18,7 +18,7 @@ const component: React.FC<Props> = ({ pokemonList }) => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: '0.6rem'
+            padding: '1rem'
           }}
         >
           <Box
@@ -34,11 +34,11 @@ const component: React.FC<Props> = ({ pokemonList }) => {
               height={25}
               alt={'poke-ball'}
             />
-            <ResponsiveTypography fontWeight={500} ml={1}>
+            <ResponsiveTypography fontWeight={700} ml={1}>
               {capitalize(pokemonList?.name) || ''}
             </ResponsiveTypography>
           </Box>
-          <KeyboardArrowRightIcon />
+          {/* <KeyboardArrowRightIcon /> */}
         </Box>
       </CardActionArea>
     </Card>

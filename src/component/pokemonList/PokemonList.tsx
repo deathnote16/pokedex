@@ -6,6 +6,7 @@ import { PokemonListCard } from './PokemonListCard';
 import Link from 'next/link';
 import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
 import { PaginationPage } from 'component/pagination';
+import { usePokemonPayload } from 'hook';
 
 const { useGetPokemonListQuery } = modules.pokemonModule;
 
@@ -19,19 +20,15 @@ const FlexBox = styled('div')({
 
 type Props = {
   offset?: number;
-  onClickPokemonDetils: (pokemonName: string) => void;
 };
 
-const Component: React.FC<Props> = ({ offset, onClickPokemonDetils }) => {
+const Component: React.FC<Props> = ({ offset }) => {
   const customHeight = '90vh';
-  const { data, isSuccess, isFetching, isLoading, isError } =
-    useGetPokemonListQuery({ limit: 30, offset });
-
-  const handleClick = (pokemon?: string) => {
-    if (pokemon) {
-      onClickPokemonDetils(pokemon);
-    }
-  };
+  const { getPokemonName } = usePokemonPayload();
+  const { data, isFetching, isLoading, isError } = useGetPokemonListQuery({
+    limit: 30,
+    offset
+  });
 
   return (
     <Paper
@@ -54,7 +51,7 @@ const Component: React.FC<Props> = ({ offset, onClickPokemonDetils }) => {
         data?.results?.map((pokemon, index) => (
           <Box
             key={pokemon?.name}
-            onClick={() => handleClick(pokemon.name ?? pokemon.name)}
+            onClick={() => getPokemonName(pokemon?.name)}
           >
             <PokemonListCard pokemonList={pokemon || {}} />
           </Box>
