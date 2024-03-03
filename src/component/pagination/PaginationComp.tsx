@@ -1,39 +1,19 @@
 import React from 'react';
-import { usePagination } from 'hook';
 import { styled } from '@mui/system';
-import { Box, Button, Divider, Paper, Typography } from '@mui/material';
-
-const FlexBox = styled(Paper)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-evenly',
-  alignItems: 'center'
-}));
-
-const FontStyle = styled(Typography)(({ theme }) => ({
-  fontWeight: '600',
-  // fontVariant: '',
-  [theme.breakpoints.up('xs')]: {
-    fontSize: '8px'
-  },
-  [theme.breakpoints.up('md')]: {
-    fontSize: '12px'
-  }
-}));
+import { Button, ButtonGroup, Paper } from '@mui/material';
 
 type Props = { nextPage?: () => void; prevPage?: () => void };
 
 const Component: React.FC<Props> = ({ prevPage, nextPage }) => {
   return (
-    <FlexBox>
-      <Button onClick={prevPage}>
-        <FontStyle>{'Previous'}</FontStyle>
+    <ButtonGroup variant="contained" aria-label="Basic button group">
+      <Button sx={{ width: '100px' }} onClick={prevPage}>
+        {'Previous'}
       </Button>
-      <Divider orientation="vertical" variant="middle" flexItem />
-      <Button onClick={nextPage}>
-        <FontStyle>{'Next'}</FontStyle>
+      <Button sx={{ width: '100px' }} onClick={nextPage}>
+        {'Next'}
       </Button>
-    </FlexBox>
+    </ButtonGroup>
   );
 };
 

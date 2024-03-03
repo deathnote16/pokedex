@@ -30,6 +30,7 @@ const Component: React.FC<Props> = ({ pokemonName }) => {
             pokemonSpriteIcon={pokeDetails?.sprites?.front_default}
             pokeId={pokeDetails?.id}
             pokeName={pokeDetails?.name}
+            isLoading={isLoading || isFetching}
           />
         </Grid>
         <Grid item sm={12} md={6}>
