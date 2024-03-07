@@ -2,11 +2,11 @@ import React from 'react';
 import { Box, Card, Container, Paper } from '@mui/material';
 import { styled } from '@mui/system';
 import { modules } from 'modules';
-import { PokemonListCard } from './PokemonListCard';
+
 import Link from 'next/link';
 import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
-import { PaginationPage } from 'component/pagination';
 import { usePokemonPayload } from 'hook';
+import { PokemonListCard } from './PokemonListCard';
 
 const { useGetPokemonListQuery } = modules.pokemonModule;
 

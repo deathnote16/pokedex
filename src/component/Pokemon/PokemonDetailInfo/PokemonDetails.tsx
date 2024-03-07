@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, Card, CardContent, Grid, Paper, Typography } from '@mui/material';
+import { Box, Grid, Paper } from '@mui/material';
 import { modules } from 'modules';
 import { padding } from '@mui/system';
-import { PokeHeader } from './PokeDetailsHeader';
-import { PokemonSprite } from './PokemonSprite';
-import { PokemonStats } from './PokemonStats';
-import { PokeGeneralInfo } from './PokeGeneralInfo';
+
+import { PokeHeader } from 'component/Pokemon/PokemonNameHeader';
+import { PokemonSprite } from '../PokemonSprite';
+import { PokeGeneralInfo } from '../PokemonGeneralInfo';
+import { PokemonStats } from '../PokemonStat';
 
 const { useGetPokemonDetailsQuery } = modules.pokemonModule;
 

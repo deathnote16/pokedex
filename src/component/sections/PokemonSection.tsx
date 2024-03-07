@@ -2,9 +2,10 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import { Box, styled } from '@mui/system';
 import { PaginationPage } from 'component/pagination';
-import { PokemonDetails } from 'component/pokemonList/PokemonDetails';
-import { PokemonList } from 'component/pokemonList/PokemonList';
+import { PokemonDetails } from 'component/Pokemon/PokemonDetailInfo/PokemonDetails';
+
 import { usePagination, usePokemonPayload } from 'hook';
+import { PokemonList } from 'component/Pokemon/PokemonList';
 
 const FlexCenter = styled(Box)({
   display: 'flex',

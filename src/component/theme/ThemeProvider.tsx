@@ -2,14 +2,14 @@ import { FC, ReactNode, memo } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { colors } from '@mui/material';
 import { customColor } from './customColors';
-import { League_Spartan } from 'next/font/google';
+import { League_Spartan, Teko } from 'next/font/google';
 import { muiColors } from 'constant';
 
 type MuiThemeProps = {
   children?: ReactNode;
 };
 
-const leaegueSpartan = League_Spartan({
+const teko = Teko({
   subsets: []
 });
 
@@ -17,7 +17,7 @@ const component: FC<MuiThemeProps> = ({ children }) => {
   //put all custom themes here or in seperate container
   const theme = createTheme({
     typography: {
-      fontFamily: leaegueSpartan.style.fontFamily
+      fontFamily: teko.style.fontFamily
     },
     palette: {
       primary: {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Avatar, Box, Card, Typography } from '@mui/material';
-import { ResponsiveTitle, ResponsiveTypography } from 'component/typography';
+import { Avatar, Box, Card } from '@mui/material';
+import { ResponsiveTitle } from 'component/typography';
 import Image from 'next/image';
 
 const backgroundStyle = {

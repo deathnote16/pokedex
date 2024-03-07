@@ -1,6 +1,6 @@
 import { Container, Grid } from '@mui/material';
 import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
-import { PokemonList } from 'component/pokemonList/PokemonList';
+import { PokemonList } from 'component/Pokemon/PokemonList/PokemonList';
 
 import { FC, useEffect, useState } from 'react';
 
