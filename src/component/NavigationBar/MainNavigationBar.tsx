@@ -1,17 +1,26 @@
-import { AppBar, Box, Typography } from '@mui/material';
+import React, { FC, Fragment, memo } from 'react';
+import { AppBar, Box, Button, Typography } from '@mui/material';
 import { FlexBoxStartRow } from 'component/BoxLayout/Boxes';
 import { ResponsiveTitle } from 'component/typography';
 import Image from 'next/image';
-import React, { FC, Fragment, memo } from 'react';
 import { SubNavigationBar } from '.';
+import useWindowSize from 'hook/use-window-size';
+import LinearScaleIcon from '@mui/icons-material/LinearScale';
 
 type Props = {};
 
 const Component: FC<Props> = ({}) => {
+  const { isMobile } = useWindowSize();
+
   return (
     <Fragment>
       <AppBar position="static">
-        <FlexBoxStartRow p={'1rem'}>
+        <Box
+          p={'1rem'}
+          display={'flex'}
+          justifyContent={'space-between'}
+          alignItems={'center'}
+        >
           <FlexBoxStartRow>
             <Image
               src={`/images/png/pokeballs2.png`}
@@ -21,9 +30,14 @@ const Component: FC<Props> = ({}) => {
             />
             <ResponsiveTitle>{`POKEDEX`}</ResponsiveTitle>
           </FlexBoxStartRow>
-        </FlexBoxStartRow>
+          {isMobile && (
+            <Button color="secondary">
+              <LinearScaleIcon fontSize="large" />
+            </Button>
+          )}
+        </Box>
       </AppBar>
-      <SubNavigationBar />
+      {!isMobile ? <SubNavigationBar /> : null}
     </Fragment>
   );
 };

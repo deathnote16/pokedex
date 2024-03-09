@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 
 const useWindowSize = () => {
-  const [windowSizeWidth, setWindowSizeWidth] = useState<number>();
-  const [windowSizeHeight, setWindowSizeHeight] = useState<number>();
+  const [windowSizeWidth, setWindowSizeWidth] = useState<number>(0);
+  const [windowSizeHeight, setWindowSizeHeight] = useState<number>(0);
 
   const windowSizeWidthListener = useCallback(
     debounce(() => {
@@ -25,6 +25,10 @@ const useWindowSize = () => {
     []
   );
 
+  const isMobile = useMemo(() => {
+    return windowSizeWidth <= 800;
+  }, [windowSizeWidth]);
+
   useEffect(() => {
     if (window) {
       window.addEventListener('resize', windowSizeWidthListener);
@@ -39,7 +43,9 @@ const useWindowSize = () => {
 
   return {
     windowSizeWidth,
-    windowSizeHeight
+    windowSizeHeight,
+
+    isMobile
   };
 };
 

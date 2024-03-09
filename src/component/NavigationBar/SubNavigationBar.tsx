@@ -6,6 +6,7 @@ import { subNavigationPath } from 'constant/routing-links/sub-navigation';
 import { FlexBoxRow } from 'component/BoxLayout/Boxes';
 import { ResponsiveBoldTypography } from 'component/typography';
 import { customColor } from 'component/theme';
+import useWindowSize from 'hook/use-window-size';
 
 const BoxNav = styled(Box)({
   display: 'flex',
@@ -13,7 +14,7 @@ const BoxNav = styled(Box)({
   justifyContent: 'center',
   alignItems: 'center',
   minWidth: '150px',
-  paddingTop: '0.5rem',
+  padding: '0.5rem',
   background: customColor.primary.main,
   borderLeft: `1px solid ${customColor.secondary.main}`,
   borderRight: `1px solid ${customColor.secondary.main}`,
