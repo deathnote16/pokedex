@@ -1,11 +1,11 @@
 const primary = {
-  main: '#18ab90',
+  main: '#F4F2F0',
   light: '#63e9d0',
   dark: '#10705e',
   contrastText: '#e9fcf8'
 };
 const secondary = {
-  main: '#1c3188',
+  main: '#A99282',
   light: '#6b82e1',
   dark: '#111f55',
   contrastText: ' #eaedfb'

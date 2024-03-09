@@ -4,8 +4,8 @@ import { styled } from '@mui/system';
 export const FlexBoxRow = styled(Box)({
   display: 'flex',
   flexWrap: 'wrap',
-  flexDirection: 'row',
-  padding: '1rem'
+  flexDirection: 'row'
+  // padding: '1rem'
 });
 
 export const FlexBoxColumn = styled(Box)({
@@ -20,8 +20,7 @@ export const FlexBoxStartRow = styled(Box)({
   flexWrap: 'wrap',
   flexDirection: 'row',
   justifyContent: 'flex-start',
-  alignItems: 'center',
-  padding: '1rem'
+  alignItems: 'center'
 });
 
 export const FlexBoxStartColumn = styled(Box)({
