@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { capitalize } from 'lodash';
 import { ResponsiveTypography } from 'component/typography';
 import { usePokemonPayload } from 'hook';
-import { muiColors } from 'constant';
+import { customColor } from 'component/theme';
 
 type Props = { pokemonList: Pokemon };
 
@@ -33,7 +33,7 @@ const Component: React.FC<Props> = ({ pokemonList }) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '1rem',
-            background: pokemonActive ? muiColors?.secondary : 'none',
+            background: pokemonActive ? customColor.secondary.main : 'none',
             color: pokemonActive ? 'white' : 'black'
           }}
         >

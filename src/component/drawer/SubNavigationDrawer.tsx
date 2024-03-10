@@ -1,10 +1,9 @@
-import React, { FC, Fragment, memo } from 'react';
-import { AppBar, Box } from '@mui/material';
-import { styled } from '@mui/system';
-import Image from 'next/image';
-import { subNavigationPath } from 'constant/routing-links/sub-navigation';
+import { FC, memo } from 'react';
+import { Box, Drawer, List, styled } from '@mui/material';
 import { FlexBoxRow } from 'component/BoxLayout/Boxes';
 import { ResponsiveBoldTypography } from 'component/typography';
+import { subNavigationPath } from 'constant/routing-links/sub-navigation';
+import Image from 'next/image';
 import { customColor } from 'component/theme';
 
 const BoxNav = styled(Box)({
@@ -23,10 +22,10 @@ const BoxNav = styled(Box)({
 
 type Props = {};
 
-const Component: FC<Props> = ({}) => {
+const Component: FC<Props> = () => {
   return (
-    <Fragment>
-      <AppBar position="static" color="secondary">
+    <Drawer open={true} onClose={() => {}}>
+      <List>
         <FlexBoxRow justifyContent={'center'} padding={0}>
           {subNavigationPath.map((path, index) => (
             <BoxNav key={index}>
@@ -42,9 +41,9 @@ const Component: FC<Props> = ({}) => {
             </BoxNav>
           ))}
         </FlexBoxRow>
-      </AppBar>
-    </Fragment>
+      </List>
+    </Drawer>
   );
 };
 
-export const SubNavigationBar = memo(Component);
+export const SubNavigationDrawer = memo(Component);

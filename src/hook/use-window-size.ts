@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 
 const useWindowSize = () => {
-  const [windowSizeWidth, setWindowSizeWidth] = useState<number>(0);
+  const [windowSizeWidth, setWindowSizeWidth] = useState<number>(1200);
   const [windowSizeHeight, setWindowSizeHeight] = useState<number>(0);
 
   const windowSizeWidthListener = useCallback(

@@ -3,7 +3,6 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import { colors } from '@mui/material';
 import { customColor } from './customColors';
 import { League_Spartan, Teko } from 'next/font/google';
-import { muiColors } from 'constant';
 
 type MuiThemeProps = {
   children?: ReactNode;
@@ -21,10 +20,10 @@ const component: FC<MuiThemeProps> = ({ children }) => {
     },
     palette: {
       primary: {
-        main: muiColors.primary
+        main: customColor.primary.main
       },
       secondary: {
-        main: muiColors.secondary
+        main: customColor.secondary.main
       }
     }
   });

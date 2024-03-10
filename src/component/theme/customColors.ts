@@ -5,11 +5,19 @@ const primary = {
   contrastText: '#e9fcf8'
 };
 const secondary = {
-  main: '#A99282',
+  main: '#857B74',
   light: '#6b82e1',
   dark: '#111f55',
   contrastText: ' #eaedfb'
 };
+
+const highLight = {
+  main: '#36383a',
+  light: '#6b82e1',
+  dark: '#111f55',
+  contrastText: ' #eaedfb'
+};
+
 const common = {
   black: '#616161',
   white: '#36383a'
@@ -64,6 +72,7 @@ const grey = {
 export const customColor = {
   primary,
   secondary,
+  highLight,
   common,
   info,
   success,

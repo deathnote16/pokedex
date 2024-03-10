@@ -8,6 +8,12 @@ const selectIsOpenPokemonDrawer = createSelector(
   (state) => state.isOpenPokemonDrawer
 );
 
+const selectSubNavigationBar = createSelector(
+  drawerSelector,
+  (state) => state.isOpenSubNavigationBar
+);
+
 export const selectors = {
-  selectIsOpenPokemonDrawer
+  selectIsOpenPokemonDrawer,
+  selectSubNavigationBar
 };

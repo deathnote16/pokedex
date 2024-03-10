@@ -11,8 +11,7 @@ export const FlexBoxRow = styled(Box)({
 export const FlexBoxColumn = styled(Box)({
   display: 'flex',
   flexWrap: 'wrap',
-  flexDirection: 'column',
-  padding: '1rem'
+  flexDirection: 'column'
 });
 
 export const FlexBoxStartRow = styled(Box)({

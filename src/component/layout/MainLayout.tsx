@@ -1,5 +1,5 @@
 import React, { FC, Fragment } from 'react';
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import Head from 'next/head';
 import { MainNavigationBar } from 'component/NavigationBar';
 

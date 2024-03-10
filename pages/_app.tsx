@@ -6,6 +6,8 @@ import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { CustomTheme } from 'component/theme';
+import { Box } from '@mui/material';
+import { SideNavigationBar } from 'component/NavigationBar/SideNavigationBar';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -19,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <Provider store={store}>
         <PersistGate persistor={persistor}>
+          <SideNavigationBar />
           <CustomTheme>
             <Component {...pageProps} />
           </CustomTheme>

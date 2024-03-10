@@ -1,14 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { DrawerState } from './types';
 
 const initialState: DrawerState = {
-  isOpenPokemonDrawer: false
+  isOpenPokemonDrawer: false,
+  isOpenSubNavigationBar: false
+};
+
+const onHandlePokemonDrawerAction = (state: DrawerState) => {
+  state.isOpenPokemonDrawer = !state.isOpenPokemonDrawer;
 };
 
 const slice = createSlice({
-  name: 'global-drawer',
+  name: 'globalDrawer',
   initialState,
-  reducers: {}
+  reducers: { onHandlePokemonDrawerAction }
 });
 
 export const actions = { ...slice.actions };
