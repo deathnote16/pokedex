@@ -1,10 +1,11 @@
 import { FC, memo } from 'react';
 import { Box, Drawer, List, styled } from '@mui/material';
-import { FlexBoxRow } from 'component/BoxLayout/Boxes';
+import { FlexBoxColumn, FlexBoxRow } from 'component/BoxLayout/Boxes';
 import { ResponsiveBoldTypography } from 'component/typography';
 import { subNavigationPath } from 'constant/routing-links/sub-navigation';
 import Image from 'next/image';
 import { customColor } from 'component/theme';
+import { useDrawer } from 'hook/use-drawer';
 
 const BoxNav = styled(Box)({
   display: 'flex',
@@ -12,10 +13,9 @@ const BoxNav = styled(Box)({
   justifyContent: 'center',
   alignItems: 'center',
   minWidth: '150px',
-  padding: '0.5rem',
+  padding: '1rem',
   background: customColor.primary.main,
-  borderLeft: `1px solid ${customColor.secondary.main}`,
-  borderRight: `1px solid ${customColor.secondary.main}`,
+
   cursor: 'pointer',
   '&:hover': { background: 'white' }
 });
@@ -23,10 +23,22 @@ const BoxNav = styled(Box)({
 type Props = {};
 
 const Component: FC<Props> = () => {
+  const { isOpenSubNavigationBar, onToggleSubNavigationDrawer } = useDrawer();
+
   return (
-    <Drawer open={true} onClose={() => {}}>
-      <List>
-        <FlexBoxRow justifyContent={'center'} padding={0}>
+    <Drawer
+      PaperProps={{
+        sx: {
+          backgroundColor: customColor.primary.main
+        }
+      }}
+      open={isOpenSubNavigationBar}
+      onClose={onToggleSubNavigationDrawer}
+    >
+      <List
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      >
+        <FlexBoxColumn padding={0} margin={0}>
           {subNavigationPath.map((path, index) => (
             <BoxNav key={index}>
               <Image
@@ -35,12 +47,12 @@ const Component: FC<Props> = () => {
                 width={40}
                 height={40}
               />
-              <ResponsiveBoldTypography color={'secondary'}>
+              <ResponsiveBoldTypography color={customColor.secondary.main}>
                 {path.title}
               </ResponsiveBoldTypography>
             </BoxNav>
           ))}
-        </FlexBoxRow>
+        </FlexBoxColumn>
       </List>
     </Drawer>
   );

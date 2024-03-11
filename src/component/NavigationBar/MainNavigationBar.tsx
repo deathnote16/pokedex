@@ -6,11 +6,13 @@ import Image from 'next/image';
 import { SubNavigationBar } from '.';
 import useWindowSize from 'hook/use-window-size';
 import LinearScaleIcon from '@mui/icons-material/LinearScale';
+import { useDrawer } from 'hook/use-drawer';
 
 type Props = {};
 
 const Component: FC<Props> = ({}) => {
   const { isMobile } = useWindowSize();
+  const { isOpenSubNavigationBar, onToggleSubNavigationDrawer } = useDrawer();
 
   return (
     <Fragment>
@@ -31,7 +33,7 @@ const Component: FC<Props> = ({}) => {
             <ResponsiveTitle>{`POKEDEX`}</ResponsiveTitle>
           </FlexBoxStartRow>
           {isMobile && (
-            <Button color="secondary">
+            <Button color="secondary" onClick={onToggleSubNavigationDrawer}>
               <LinearScaleIcon fontSize="large" />
             </Button>
           )}

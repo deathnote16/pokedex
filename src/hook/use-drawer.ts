@@ -7,16 +7,28 @@ const { actions: pokemonDrawerActions, selectors: pokemonDrawerSelectors } =
 
 export const useDrawer = () => {
   const dispatch = useAppDispatch();
+
   const isOpenPokemonDrawer = useAppSelector(
     pokemonDrawerSelectors.selectIsOpenPokemonDrawer
   );
 
+  const isOpenSubNavigationBar = useAppSelector(
+    pokemonDrawerSelectors.selectSubNavigationBar
+  );
+
   const onTogglePokemonDrawer = () => {
-    dispatch(pokemonDrawerActions.onHandlePokemonDrawerAction());
+    dispatch(pokemonDrawerActions.onTogglePokemonDrawerAction());
+  };
+
+  const onToggleSubNavigationDrawer = () => {
+    dispatch(pokemonDrawerActions.onToggleSubNavigationAction());
   };
 
   return {
     isOpenPokemonDrawer,
-    onTogglePokemonDrawer
+    isOpenSubNavigationBar,
+
+    onTogglePokemonDrawer,
+    onToggleSubNavigationDrawer
   };
 };

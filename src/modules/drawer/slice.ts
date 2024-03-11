@@ -6,14 +6,18 @@ const initialState: DrawerState = {
   isOpenSubNavigationBar: false
 };
 
-const onHandlePokemonDrawerAction = (state: DrawerState) => {
+const onTogglePokemonDrawerAction = (state: DrawerState) => {
   state.isOpenPokemonDrawer = !state.isOpenPokemonDrawer;
+};
+
+const onToggleSubNavigationAction = (state: DrawerState) => {
+  state.isOpenSubNavigationBar = !state.isOpenSubNavigationBar;
 };
 
 const slice = createSlice({
   name: 'globalDrawer',
   initialState,
-  reducers: { onHandlePokemonDrawerAction }
+  reducers: { onTogglePokemonDrawerAction, onToggleSubNavigationAction }
 });
 
 export const actions = { ...slice.actions };

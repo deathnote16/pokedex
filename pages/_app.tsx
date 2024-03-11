@@ -8,8 +8,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { CustomTheme } from 'component/theme';
 import { Box } from '@mui/material';
 import { SideNavigationBar } from 'component/NavigationBar/SideNavigationBar';
+import useWindowSize from 'hook/use-window-size';
+import { SubNavigationDrawer } from 'component/drawer';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { isMobile } = useWindowSize();
+
   return (
     <>
       <Head>
@@ -21,7 +25,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <SideNavigationBar />
+          {!isMobile && <SideNavigationBar />}
+          <SubNavigationDrawer />
           <CustomTheme>
             <Component {...pageProps} />
           </CustomTheme>

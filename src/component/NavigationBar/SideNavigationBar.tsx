@@ -5,6 +5,8 @@ import { Small } from 'component/typography';
 import SearchIcon from '@mui/icons-material/Search';
 import { customColor } from 'component/theme';
 import Image from 'next/image';
+import { modules } from 'modules';
+import { useDrawer } from 'hook/use-drawer';
 
 const BoxStyle = styled(Box)({
   display: 'flex',
@@ -21,11 +23,15 @@ const BoxStyle = styled(Box)({
 type Props = {};
 
 const Component: FC<Props> = () => {
+  const { isOpenPokemonDrawer, onTogglePokemonDrawer } = useDrawer();
+
   return (
     <Paper
       sx={{
         position: 'fixed',
-        top: '30%'
+        top: '30%',
+        zIndex: 99,
+        background: 'none'
       }}
       elevation={0}
     >
@@ -45,6 +51,7 @@ const Component: FC<Props> = () => {
             borderBottomRightRadius: '30px',
             background: customColor.primary.main
           }}
+          onClick={() => onTogglePokemonDrawer()}
         >
           <Image
             src={'/images/icon/pokeball3.png' || ''}
