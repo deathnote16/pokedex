@@ -2,32 +2,26 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 
 const useWindowSize = () => {
-  const [windowSizeWidth, setWindowSizeWidth] = useState<number>(
-    window.innerWidth || document.documentElement.clientWidth
-  );
-  const [windowSizeHeight, setWindowSizeHeight] = useState<number>(
-    window.innerHeight || document.documentElement.clientHeight
-  );
+  const [windowSizeWidth, setWindowSizeWidth] = useState(0);
+  const [windowSizeHeight, setWindowSizeHeight] = useState(0);
 
-  const handleResize = useCallback(
-    debounce(() => {
-      setWindowSizeWidth(
-        window.innerWidth || document.documentElement.clientWidth
-      );
-      setWindowSizeHeight(
-        window.innerHeight || document.documentElement.clientHeight
-      );
-    }, 250),
-    []
-  );
+  const updateWindowDimensions = () => {
+    setWindowSizeWidth(window.innerWidth);
+    setWindowSizeHeight(window.innerHeight);
+  };
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
+    // Initial call to set dimensions on load
+    updateWindowDimensions();
 
+    // Event listener to update dimensions on window resize
+    window.addEventListener('resize', updateWindowDimensions);
+
+    // Cleanup function to remove event listener
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', updateWindowDimensions);
     };
-  }, [handleResize]);
+  }, []);
 
   const isMobile = useMemo(() => {
     return windowSizeWidth <= 800;

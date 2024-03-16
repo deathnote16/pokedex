@@ -7,6 +7,7 @@ import { SubNavigationBar } from '.';
 import useWindowSize from 'hook/use-window-size';
 import LinearScaleIcon from '@mui/icons-material/LinearScale';
 import { useDrawer } from 'hook/use-drawer';
+import { MobileNavigation } from './MobileNavigationBar';
 
 type Props = {};
 
@@ -40,6 +41,7 @@ const Component: FC<Props> = ({}) => {
         </Box>
       </AppBar>
       {!isMobile ? <SubNavigationBar /> : null}
+      {isMobile && <MobileNavigation />}
     </Fragment>
   );
 };
