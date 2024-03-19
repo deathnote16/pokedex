@@ -1,12 +1,14 @@
 import { FC, memo } from 'react';
-import { Box, Paper, styled } from '@mui/material';
+import { Box, Paper, Typography, styled } from '@mui/material';
 import { FlexBoxColumn } from 'component/BoxLayout/Boxes';
-import { Small } from 'component/typography';
+import { ResponsiveTypography, Small } from 'component/typography';
 import SearchIcon from '@mui/icons-material/Search';
 import { customColor } from 'component/theme';
 import Image from 'next/image';
 import { modules } from 'modules';
 import { useDrawer } from 'hook/use-drawer';
+import { useGlobalEvent } from 'hook/use-global-event';
+import CloseIcon from '@mui/icons-material/Close';
 
 const BoxStyle = styled(Box)({
   display: 'flex',
@@ -14,9 +16,10 @@ const BoxStyle = styled(Box)({
   justifyContent: 'center',
   alignItems: 'center',
   cursor: 'pointer',
-  padding: '1rem',
+  padding: '0.5rem',
   '&:hover': {
-    background: customColor.highLight.main
+    background: customColor.highLight.main,
+    color: 'white'
   }
 });
 
@@ -24,6 +27,7 @@ type Props = {};
 
 const Component: FC<Props> = () => {
   const { isOpenPokemonDrawer, onTogglePokemonDrawer } = useDrawer();
+  const { isPokemonSearchBar, onToggleShowPokemonSearch } = useGlobalEvent();
 
   return (
     <Paper
@@ -41,14 +45,21 @@ const Component: FC<Props> = () => {
             borderTopRightRadius: '10px',
             background: customColor.secondary.main
           }}
+          onClick={() => onToggleShowPokemonSearch(!isPokemonSearchBar)}
         >
-          <SearchIcon
-            sx={{ fontSize: '50px', color: customColor.primary.main }}
-          />
+          {isPokemonSearchBar ? (
+            <CloseIcon
+              sx={{ fontSize: '30px', color: customColor.primary.main }}
+            />
+          ) : (
+            <SearchIcon
+              sx={{ fontSize: '30px', color: customColor.primary.main }}
+            />
+          )}
         </BoxStyle>
         <BoxStyle
           sx={{
-            borderBottomRightRadius: '30px',
+            borderBottomRightRadius: '20px',
             background: customColor.primary.main
           }}
           onClick={() => onTogglePokemonDrawer()}
@@ -56,10 +67,10 @@ const Component: FC<Props> = () => {
           <Image
             src={'/images/icon/pokeball3.png' || ''}
             alt="pokemon-img"
-            width={40}
-            height={40}
+            width={20}
+            height={20}
           />
-          <Small>Pokemon</Small>
+          <Typography sx={{ fontSize: '12px' }}>Pokemon</Typography>
         </BoxStyle>
       </FlexBoxColumn>
     </Paper>

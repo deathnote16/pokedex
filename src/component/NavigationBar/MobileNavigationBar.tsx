@@ -41,7 +41,7 @@ const Component: FC<Props> = ({}) => {
 
   return (
     <Fragment>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ background: customColor.secondary.main }}>
         <FlexBoxRow justifyContent={'center'} padding={'0.5rem'}>
           <SearchBar />
         </FlexBoxRow>

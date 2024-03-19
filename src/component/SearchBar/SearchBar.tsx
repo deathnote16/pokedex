@@ -1,28 +1,23 @@
 import { FC, memo, useEffect, useMemo, useState } from 'react';
-import {
-  Autocomplete,
-  Box,
-  Button,
-  IconButton,
-  Paper,
-  TextField
-} from '@mui/material';
-import { PokemonListCard } from 'component/Pokemon/PokemonList/PokemonListCard';
+import { Autocomplete, Box, TextField } from '@mui/material';
 import { usePokemonPayload } from 'hook';
 import { cloneDeep } from 'lodash';
 import { modules } from 'modules';
-import { OptionCard } from './OptionCard';
+import SearchIcon from '@mui/icons-material/Search';
+import useWindowSize from 'hook/use-window-size';
+import { useGlobalEvent } from 'hook/use-global-event';
 
 const { useGetPokemonListQuery } = modules.pokemonModule;
 
 type Props = {};
 
 const Component: FC<Props> = () => {
-  const { data, isFetching, isLoading, isError } = useGetPokemonListQuery({
+  const { data } = useGetPokemonListQuery({
     limit: 10000
   });
   const { getPokemonName } = usePokemonPayload();
-  const [searchInput, setSearchInput] = useState<string>();
+  const { isMobile } = useWindowSize();
+  const { isPokemonSearchBar, onToggleShowPokemonSearch } = useGlobalEvent();
   const [value, setValue] = useState<string | null>();
 
   const pokemonOptions = useMemo(() => {
@@ -31,6 +26,15 @@ const Component: FC<Props> = () => {
     return newPokemonOptions;
   }, [data?.results]);
 
+  const onHandlePokemonChange = (newVal: any) => {
+    setValue(newVal);
+
+    //close search bar in desktop after selecting pokemon
+    if (!isMobile && newVal) {
+      onToggleShowPokemonSearch(!isPokemonSearchBar);
+    }
+  };
+
   useEffect(() => {
     if (value) {
       getPokemonName(value);
@@ -38,18 +42,38 @@ const Component: FC<Props> = () => {
   }, [getPokemonName, value]);
 
   return (
-    <Box padding={0} sx={{ display: 'flex', flexDirection: 'row' }}>
+    <Box
+      padding={0}
+      sx={{
+        display: 'flex',
+        flexDirection: 'row'
+      }}
+    >
       <Autocomplete
-        sx={{ minWidth: '300px', backgroud: 'red' }}
-        id="pokemon-search-box"
-        value={value}
-        onChange={(event: any, newValue: any) => {
-          setValue(newValue);
+        sx={{
+          minWidth: isMobile ? '300px' : '600px',
+          zIndex: 1
         }}
+        id="pokemon-search-box"
+        autoHighlight
+        openOnFocus
+        value={value}
+        onChange={(event: any, newValue: any) =>
+          onHandlePokemonChange(newValue)
+        }
         options={pokemonOptions || []}
         renderInput={(params) => (
           <>
-            <TextField {...params} variant="outlined" label="Search Pokemon" />
+            <TextField
+              {...params}
+              variant="outlined"
+              placeholder="Search Pokemon"
+              InputProps={{
+                ...params.InputProps, // Include existing InputProps
+                startAdornment: <SearchIcon />
+              }}
+              sx={{ background: 'white' }}
+            />
           </>
         )}
       />

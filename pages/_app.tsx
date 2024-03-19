@@ -10,6 +10,7 @@ import { Box } from '@mui/material';
 import { SideNavigationBar } from 'component/NavigationBar/SideNavigationBar';
 import useWindowSize from 'hook/use-window-size';
 import { SubNavigationDrawer } from 'component/drawer';
+import { GlobalDialog } from 'component/GlobalDialog';
 
 export default function App({ Component, pageProps }: AppProps) {
   const { isMobile } = useWindowSize();
@@ -27,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <PersistGate persistor={persistor}>
           {!isMobile && <SideNavigationBar />}
           <SubNavigationDrawer />
+          <GlobalDialog />
           <CustomTheme>
             <Component {...pageProps} />
           </CustomTheme>

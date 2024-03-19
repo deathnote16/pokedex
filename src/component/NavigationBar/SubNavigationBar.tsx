@@ -33,10 +33,10 @@ const Component: FC<Props> = ({}) => {
               <Image
                 src={path.icon || ''}
                 alt="pokemon-img"
-                width={40}
-                height={40}
+                width={25}
+                height={25}
               />
-              <ResponsiveBoldTypography color={'secondary'}>
+              <ResponsiveBoldTypography fontSize={'16px'} color={'secondary'}>
                 {path.title}
               </ResponsiveBoldTypography>
             </BoxNav>
