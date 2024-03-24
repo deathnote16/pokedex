@@ -1,8 +1,7 @@
 import { FC, ReactNode, memo } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material';
-import { colors } from '@mui/material';
 import { customColor } from './customColors';
-import { League_Spartan, Teko } from 'next/font/google';
+import { Teko } from 'next/font/google';
 
 type MuiThemeProps = {
   children?: ReactNode;

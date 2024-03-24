@@ -17,7 +17,7 @@ type Props = {
 };
 
 const Component: React.FC<Props> = ({ offset, onCloseAfterSelecting }) => {
-  const customHeight = '90vh';
+  const customHeight = '80vh';
   const { getPokemonName } = usePokemonPayload();
   const { isMobile } = useWindowSize();
   const { data, isFetching, isLoading, isError } = useGetPokemonListQuery({
@@ -32,6 +32,7 @@ const Component: React.FC<Props> = ({ offset, onCloseAfterSelecting }) => {
 
   return (
     <Paper
+      elevation={0}
       sx={{
         padding: 1,
         background: 'none',
