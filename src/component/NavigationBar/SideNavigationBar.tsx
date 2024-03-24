@@ -1,12 +1,9 @@
 import { FC, memo } from 'react';
 import { Box, Paper, Typography, styled } from '@mui/material';
 import { FlexBoxColumn } from 'component/BoxLayout/Boxes';
-import { ResponsiveTypography, Small } from 'component/typography';
 import SearchIcon from '@mui/icons-material/Search';
 import { customColor } from 'component/theme';
 import Image from 'next/image';
-import { modules } from 'modules';
-import { useDrawer } from 'hook/use-drawer';
 import { useGlobalEvent } from 'hook/use-global-event';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -26,8 +23,12 @@ const BoxStyle = styled(Box)({
 type Props = {};
 
 const Component: FC<Props> = () => {
-  const { isOpenPokemonDrawer, onTogglePokemonDrawer } = useDrawer();
-  const { isPokemonSearchBar, onToggleShowPokemonSearch } = useGlobalEvent();
+  const {
+    isPokemonSearchBar,
+    isPokemonList,
+    onToggleShowPokemonSearch,
+    onToggleShowPokemonList
+  } = useGlobalEvent();
 
   return (
     <Paper
@@ -62,7 +63,7 @@ const Component: FC<Props> = () => {
             borderBottomRightRadius: '20px',
             background: customColor.primary.main
           }}
-          onClick={() => onTogglePokemonDrawer()}
+          onClick={() => onToggleShowPokemonList(true)}
         >
           <Image
             src={'/images/icon/pokeball3.png' || ''}

@@ -19,15 +19,15 @@ const Component = () => {
 
   return (
     <Grid container spacing={2} mt={1} mb={1}>
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={12}>
         <PokemonDetails pokemonName={pokemonName} />
       </Grid>
-      <Grid item xs={12} md={4}>
+      {/* <Grid item xs={12} md={4}>
         <PokemonList offset={currentPage} />
         <FlexCenter mt={1}>
           <PaginationPage nextPage={nextPage} prevPage={prevPage} />
         </FlexCenter>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

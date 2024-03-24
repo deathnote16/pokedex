@@ -8,6 +8,12 @@ const selectIsOpenPokemonSearch = createSelector(
   (state) => state.isOpenPokemonSearch
 );
 
+const selectIsOpenPokemonList = createSelector(
+  globalEventSelector,
+  (state) => state.isOpenPokemonList
+);
+
 export const selector = {
-  selectIsOpenPokemonSearch
+  selectIsOpenPokemonSearch,
+  selectIsOpenPokemonList
 };

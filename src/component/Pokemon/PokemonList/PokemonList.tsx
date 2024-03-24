@@ -1,44 +1,43 @@
 import React from 'react';
-import { Box, Card, Container, Paper } from '@mui/material';
+import { Box, Drawer, Paper } from '@mui/material';
 import { styled } from '@mui/system';
 import { modules } from 'modules';
 
-import Link from 'next/link';
 import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
 import { usePokemonPayload } from 'hook';
 import { PokemonListCard } from './PokemonListCard';
+import useWindowSize from 'hook/use-window-size';
+import { motion } from 'framer-motion';
 
 const { useGetPokemonListQuery } = modules.pokemonModule;
 
-const FlexBox = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'row',
-  flexWrap: 'wrap'
-});
-
 type Props = {
   offset?: number;
+  onCloseAfterSelecting: () => void;
 };
 
-const Component: React.FC<Props> = ({ offset }) => {
+const Component: React.FC<Props> = ({ offset, onCloseAfterSelecting }) => {
   const customHeight = '90vh';
   const { getPokemonName } = usePokemonPayload();
+  const { isMobile } = useWindowSize();
   const { data, isFetching, isLoading, isError } = useGetPokemonListQuery({
     limit: 30,
     offset
   });
 
+  const onHandlePressPokemonCard = (pokeName?: string) => {
+    onCloseAfterSelecting();
+    getPokemonName(pokeName);
+  };
+
   return (
     <Paper
       sx={{
         padding: 1,
-        background: 'rgba(240, 240, 240, 0.5)',
-        border: '10px solid black',
+        background: 'none',
         minHeight: customHeight,
-        maxHeight: '90vh',
-        overflowY: 'scroll'
+        minWidth: isMobile ? '300px' : '500px',
+        overflowX: 'hidden'
       }}
     >
       {isFetching || isLoading ? (
@@ -49,12 +48,20 @@ const Component: React.FC<Props> = ({ offset }) => {
         />
       ) : (
         data?.results?.map((pokemon, index) => (
-          <Box
+          <motion.div
+            initial={{ x: 500 }}
+            animate={{ x: [500, -100, 0] }}
+            transition={{
+              stiffness: 3,
+              delay: index * 0.1
+            }}
+            whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
             key={pokemon?.name}
-            onClick={() => getPokemonName(pokemon?.name)}
           >
-            <PokemonListCard pokemonList={pokemon || {}} />
-          </Box>
+            <Box onClick={() => onHandlePressPokemonCard(pokemon?.name)}>
+              <PokemonListCard pokemonList={pokemon || {}} />
+            </Box>
+          </motion.div>
         ))
       )}
     </Paper>

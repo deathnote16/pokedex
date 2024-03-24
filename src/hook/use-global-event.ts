@@ -12,12 +12,23 @@ export const useGlobalEvent = () => {
     globalEventSelector.selectIsOpenPokemonSearch
   );
 
+  const isPokemonList = useAppSelector(
+    globalEventSelector.selectIsOpenPokemonList
+  );
+
   const onToggleShowPokemonSearch = (isOpen: boolean) => {
     dispatch(globalEventAction.togglePokemonSearchAction({ isOpen }));
   };
 
+  const onToggleShowPokemonList = (isOpen: boolean) => {
+    dispatch(globalEventAction.togglePokemonListAction({ isOpen }));
+  };
+
   return {
     isPokemonSearchBar,
-    onToggleShowPokemonSearch
+    isPokemonList,
+
+    onToggleShowPokemonSearch,
+    onToggleShowPokemonList
   };
 };

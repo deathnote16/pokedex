@@ -2,7 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { InitialStateType } from '.';
 
 const initialState: InitialStateType = {
-  isOpenPokemonSearch: false
+  isOpenPokemonSearch: false,
+  isOpenPokemonList: false
 };
 
 const togglePokemonSearchAction = (
@@ -12,10 +13,17 @@ const togglePokemonSearchAction = (
   state.isOpenPokemonSearch = payload.isOpen;
 };
 
+const togglePokemonListAction = (
+  state: InitialStateType,
+  { payload }: PayloadAction<{ isOpen: boolean }>
+) => {
+  state.isOpenPokemonList = payload.isOpen;
+};
+
 const slice = createSlice({
   name: 'eventSlice',
   initialState,
-  reducers: { togglePokemonSearchAction }
+  reducers: { togglePokemonSearchAction, togglePokemonListAction }
 });
 
 export const actions = { ...slice.actions };

@@ -10,7 +10,7 @@ import { Box } from '@mui/material';
 import { SideNavigationBar } from 'component/NavigationBar/SideNavigationBar';
 import useWindowSize from 'hook/use-window-size';
 import { SubNavigationDrawer } from 'component/drawer';
-import { GlobalDialog } from 'component/GlobalDialog';
+import { GlobalDialog } from 'component/GlobalComponent';
 
 export default function App({ Component, pageProps }: AppProps) {
   const { isMobile } = useWindowSize();
