@@ -2,7 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ApiPayloadState } from './types';
 
 const initialState: ApiPayloadState = {
-  pokemonName: ''
+  pokemonName: 'bulbasaur',
+  pokeIdNumber: 1
 };
 
 const getPokemonName = (
@@ -11,11 +12,17 @@ const getPokemonName = (
 ) => {
   state.pokemonName = payload;
 };
+const getPokeIdNumber = (
+  state: ApiPayloadState,
+  { payload }: PayloadAction<number | undefined>
+) => {
+  state.pokeIdNumber = payload;
+};
 
 const slice = createSlice({
   name: 'apiFilters',
   initialState,
-  reducers: { getPokemonName }
+  reducers: { getPokemonName, getPokeIdNumber }
 });
 
 export const actions = { ...slice.actions };

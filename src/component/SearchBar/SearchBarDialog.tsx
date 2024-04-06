@@ -11,7 +11,7 @@ type Props = { isOpen: boolean };
 
 const Component: FC<Props> = ({ isOpen }) => {
   return (
-    <Backdrop open={isOpen} sx={{ zIndex: 1 }}>
+    <Backdrop open={isOpen} sx={{ zIndex: 2 }}>
       <motion.div
         initial={{ y: 0 }}
         animate={{

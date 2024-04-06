@@ -8,6 +8,12 @@ const pokemonNameSelector = createSelector(
   (state) => state.pokemonName
 );
 
+const pokemonIdNumberSelector = createSelector(
+  selectApiPayload,
+  (state) => state.pokeIdNumber
+);
+
 export const selectors = {
-  pokemonNameSelector
+  pokemonNameSelector,
+  pokemonIdNumberSelector
 };

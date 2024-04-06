@@ -1,20 +1,24 @@
 import React from 'react';
-import { Box, Grid, Paper } from '@mui/material';
+import { Box, Grid, Paper, Typography } from '@mui/material';
 import { modules } from 'modules';
 import { padding } from '@mui/system';
 
-import { PokeHeader } from 'component/Pokemon/PokemonNameHeader';
+import { PokeHeader, PokemonNameBg } from 'component/Pokemon/PokemonNameHeader';
 import { PokemonSprite } from '../PokemonSprite';
 import { PokeGeneralInfo } from '../PokemonGeneralInfo';
 import { PokemonStats } from '../PokemonStat';
+import { FlexBox } from 'component/BoxLayout/Boxes';
+import Image from 'next/image';
+import { usePokemonPayload } from 'hook';
 
 const { useGetPokemonDetailsQuery } = modules.pokemonModule;
 
 type Props = {
-  pokemonName?: string;
+  // pokemonName?: string;
 };
 
-const Component: React.FC<Props> = ({ pokemonName }) => {
+const Component: React.FC<Props> = ({}) => {
+  const { pokemonName } = usePokemonPayload();
   const {
     data: pokeDetails,
     isLoading,

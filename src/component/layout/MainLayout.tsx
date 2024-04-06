@@ -18,7 +18,7 @@ const Component: FC<Props> = ({ children }) => {
       {/* TODO: add navigation here */}
       <>
         <MainNavigationBar />
-        <Container maxWidth="lg">{children}</Container>
+        <Container maxWidth="xl">{children}</Container>
       </>
     </Fragment>
   );

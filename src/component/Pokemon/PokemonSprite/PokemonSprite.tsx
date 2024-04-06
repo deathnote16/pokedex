@@ -13,7 +13,6 @@ type Props = {
 const boxStyle = {
   backgroundImage: `url(/images/png/pokemon_bg3.jpg)`,
   backgroundSize: 'cover',
-
   backgroundPosition: 'center',
   width: '100%',
   height: 'auto',

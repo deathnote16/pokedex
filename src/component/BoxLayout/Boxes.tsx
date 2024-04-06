@@ -1,6 +1,12 @@
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 
+export const FlexBox = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  flexWrap: 'wrap'
+});
+
 export const FlexBoxRow = styled(Box)({
   display: 'flex',
   flexWrap: 'wrap',
