@@ -5,38 +5,51 @@ import { PokemonNameBg } from 'component/Pokemon/PokemonNameHeader';
 import { PokemonSpriteHeader } from './PokemonSpriteHeader';
 import { modules } from 'modules';
 import { usePokemonPayload } from 'hook';
+import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
+import useWindowSize from 'hook/use-window-size';
 
 const { useGetPokemonDetailsQuery } = modules.pokemonModule;
 
 type Props = {};
 
 const Component: FC<Props> = () => {
-  const { pokemonName } = usePokemonPayload();
-  const {
-    data: pokeDetails,
-    isLoading,
-    isFetching
-  } = useGetPokemonDetailsQuery({
-    url: `https://pokeapi.co/api/v2/pokemon/${pokemonName || 'bulbasaur'}/`
-  });
+  const { pokemonName, isLoading, isFetching } = usePokemonPayload();
+  const { isMobile } = useWindowSize();
 
   return (
-    <FlexBox sx={{ width: '100%', height: '100vh' }}>
+    <FlexBox
+      sx={{
+        width: '100%',
+        height: isMobile ? '70vh' : '100vh'
+      }}
+    >
       <FlexBox
         position={'relative'}
         style={{
           width: '100%',
-          height: '100vh',
+          height: isMobile ? '40vh' : '100vh',
           justifyContent: 'center',
           alignItems: 'center'
         }}
       >
-        <Box position={'absolute'} style={{ zIndex: 1, width: '100%' }}>
-          <PokemonNameBg pokemonName={pokeDetails?.name} />
-        </Box>
-        <Box position={'absolute'} style={{ zIndex: 1, width: '100%' }}>
-          <PokemonSpriteHeader imgSourceLink={pokeDetails?.sprites} />
-        </Box>
+        {isLoading ||
+          (isFetching ? (
+            <PokeballLoaders
+              imgSrc={`/images/png/pokeballs2.png`}
+              height={'40vh'}
+              dimension={220}
+            />
+          ) : (
+            <>
+              <Box position={'absolute'} style={{ zIndex: 1, width: '100%' }}>
+                {/* You can change background here */}
+                <PokemonNameBg pokemonName={pokemonName} />
+              </Box>
+              <Box position={'absolute'} style={{ zIndex: 1, width: '100%' }}>
+                <PokemonSpriteHeader />
+              </Box>
+            </>
+          ))}
       </FlexBox>
     </FlexBox>
   );

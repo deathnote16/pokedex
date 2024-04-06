@@ -1,7 +1,7 @@
 import { modules } from 'modules';
 import { useAppSelector } from './use-app-selector';
 import { useAppDispatch } from './use-app-dispatch';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 const { useGetPokemonDetailsQuery } = modules.pokemonModule;
 const { actions: pokemonPayloadAction, selectors: pokemonPayloadSelector } =
@@ -21,16 +21,14 @@ export const usePokemonPayload = () => {
     url: `https://pokeapi.co/api/v2/pokemon/${pokemonName || 'bulbasaur'}/`
   });
 
+  const pokemonSprite = useMemo(
+    () => pokeDetails?.sprites?.other?.['official-artwork']?.front_default,
+    [pokeDetails?.sprites?.other]
+  );
+
   const getPokemonName = useCallback(
     (pokeName?: string) => {
       dispatch(pokemonPayloadAction.getPokemonName(pokeName));
-    },
-    [dispatch]
-  );
-
-  const getPokemonIdNumber = useCallback(
-    (pokeId?: number) => {
-      dispatch(pokemonPayloadAction.getPokeIdNumber(pokeId));
     },
     [dispatch]
   );
@@ -42,7 +40,7 @@ export const usePokemonPayload = () => {
     isFetching,
     //========Actions and value =========
     pokemonName,
-    getPokemonName,
-    getPokemonIdNumber
+    pokemonSprite,
+    getPokemonName
   };
 };

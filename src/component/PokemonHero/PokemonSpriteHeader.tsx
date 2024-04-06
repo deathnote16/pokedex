@@ -24,14 +24,13 @@ const shadow = `0px 14px 10px rgba(0,0,0,0.15),
 
 const Component: FC<Props> = ({ imgSourceLink }) => {
   const { isMobile } = useWindowSize();
-  const { pokemonName } = usePokemonPayload();
+  const { pokemonName, pokemonSprite, pokeDetails } = usePokemonPayload();
 
   return (
     <FlexBox flexDirection={'column'}>
-      <FlexBox></FlexBox>
       <FlexBox>
         <Image
-          src={imgSourceLink?.other?.['official-artwork']?.front_default || ''}
+          src={pokemonSprite || ''}
           alt="pokemon-img"
           width={500}
           height={500}
@@ -47,20 +46,20 @@ const Component: FC<Props> = ({ imgSourceLink }) => {
         }}
       >
         <Typography
-          variant="h4"
+          variant={isMobile ? 'h6' : 'h4'}
           fontWeight={900}
-          mb={-3}
+          mb={isMobile ? -2 : -3}
           style={{
             textShadow: whiteShadow
           }}
           color={customColor.highLight.main}
         >
-          {'#100'}
+          {`#${pokeDetails?.id}`}
         </Typography>
         <Typography
           variant="h1"
           fontWeight={900}
-          fontSize={100}
+          fontSize={isMobile ? 50 : 100}
           color={customColor.highLight.main}
           style={{
             textShadow: `${shadow},${whiteShadow}`
