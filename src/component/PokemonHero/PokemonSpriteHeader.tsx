@@ -6,6 +6,7 @@ import { Typography } from '@mui/material';
 import useWindowSize from 'hook/use-window-size';
 import { usePokemonPayload } from 'hook';
 import { customColor } from 'component/theme';
+import { PokemonTypeEmblem } from 'component/Pokemon/PokemonType';
 
 type Props = { imgSourceLink?: Sprites };
 
@@ -67,6 +68,7 @@ const Component: FC<Props> = ({ imgSourceLink }) => {
         >
           {pokemonName?.toUpperCase()}
         </Typography>
+        <PokemonTypeEmblem />
       </FlexBox>
     </FlexBox>
   );
