@@ -3,7 +3,9 @@ import { useAppSelector } from './use-app-selector';
 import { useAppDispatch } from './use-app-dispatch';
 import { useCallback, useMemo } from 'react';
 
-const { useGetPokemonDetailsQuery } = modules.pokemonModule;
+const { useGetPokemonDetailsQuery, useGetPokemonSpeciesQuery } =
+  modules.pokemonModule;
+
 const { actions: pokemonPayloadAction, selectors: pokemonPayloadSelector } =
   modules.apiPayload;
 
@@ -21,9 +23,49 @@ export const usePokemonPayload = () => {
     url: `https://pokeapi.co/api/v2/pokemon/${pokemonName || 'bulbasaur'}/`
   });
 
+  const {
+    data: pokeSpecies,
+    isLoading: isPokeSpeciesLoading,
+    isFetching: isPokeSpeciesFetching
+  } = useGetPokemonSpeciesQuery({
+    url: `https://pokeapi.co/api/v2/pokemon-species/${
+      pokemonName || 'bulbasaur'
+    }/`
+  });
+
   const pokemonSprite = useMemo(
     () => pokeDetails?.sprites?.other?.['official-artwork']?.front_default,
     [pokeDetails?.sprites?.other]
+  );
+
+  const isLegendaryPokemon = useMemo(
+    () => pokeSpecies?.is_legendary,
+    [pokeSpecies?.is_legendary]
+  );
+
+  const isMythicalPokemon = useMemo(
+    () => pokeSpecies?.is_mythical,
+    [pokeSpecies?.is_mythical]
+  );
+
+  const pokeSpeciesFlavorText = useMemo(
+    () =>
+      pokeSpecies?.flavor_text_entries?.filter((flavorText, index) => {
+        return (
+          //get the latest description only and language english
+          flavorText?.language?.name === 'en' &&
+          (flavorText?.version?.name === 'red' ||
+            flavorText?.version?.name === 'firered' ||
+            flavorText?.version?.name === 'crystal' ||
+            flavorText?.version?.name === 'soulsilver' ||
+            flavorText?.version?.name === 'emerald' ||
+            flavorText?.version?.name === 'omega-ruby' ||
+            flavorText?.version?.name === 'black' ||
+            flavorText?.version?.name === 'x' ||
+            flavorText?.version?.name === 'sword')
+        );
+      }),
+    [pokeSpecies?.flavor_text_entries]
   );
 
   const getPokemonName = useCallback(
@@ -36,11 +78,18 @@ export const usePokemonPayload = () => {
   return {
     //PokemonData
     pokeDetails,
+    pokemonSprite,
     isLoading,
     isFetching,
+    //Pokemon Species Data
+    pokeSpecies,
+    pokeSpeciesFlavorText,
+    isLegendaryPokemon,
+    isMythicalPokemon,
+    isPokeSpeciesFetching,
+    isPokeSpeciesLoading,
     //========Actions and value =========
     pokemonName,
-    pokemonSprite,
     getPokemonName
   };
 };

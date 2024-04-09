@@ -20,7 +20,7 @@ const Component: FC<Props> = () => {
     <FlexBox
       sx={{
         width: '100%',
-        height: isMobile ? '70vh' : '100vh'
+        height: isMobile ? '50vh' : '100vh'
       }}
     >
       <FlexBox

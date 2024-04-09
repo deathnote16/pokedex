@@ -5,7 +5,8 @@ import {
   PokemonDetailsResponse,
   PokemonPayload
 } from './types';
-import { PokeAbilityResponse } from './pokeAbilitiyTypes';
+import { PokeAbilityResponse } from './types/pokeAbilitiyTypes';
+import { PokemonSpeciesResponse } from './types/pokemonSpeciesType';
 
 export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,10 +20,10 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
         };
       }
     }),
-
+    //========api endpoints used==========
     getPokemonDetails: builder.query<
       PokemonDetailsResponse,
-      PokemonDetailsPayload
+      PokemonDetailsPayload //common payload
     >({
       query(data) {
         return {
@@ -34,7 +35,19 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
     }),
     getPokemonAbility: builder.query<
       PokeAbilityResponse,
-      PokemonDetailsPayload
+      PokemonDetailsPayload //common payload
+    >({
+      query(data) {
+        return {
+          url: data.url || '',
+          method: `GET`,
+          header: {}
+        };
+      }
+    }),
+    getPokemonSpecies: builder.query<
+      PokemonSpeciesResponse,
+      PokemonDetailsPayload //common payload
     >({
       query(data) {
         return {
@@ -44,25 +57,14 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
         };
       }
     })
-    //TODO:mutation is for sending updates to the server
-    // getPokemonDetails: builder.mutation<any, PokemonPayload>({
-    //   query(data) {
-    //     return {
-    //       url: `pokemon/${data?.name}`,
-    //       params: {
-    //         limit: data?.limit
-    //       },
-    //       method: `GET`,
-    //       header: {}
-    //       // invalidatesTags: [`Post`]
-    //     };
-    //   }
-    // })
+
+    //====
   })
 });
 
 export const {
   useGetPokemonListQuery,
   useGetPokemonDetailsQuery,
-  useGetPokemonAbilityQuery
+  useGetPokemonAbilityQuery,
+  useGetPokemonSpeciesQuery
 } = extendedPokedexApiSlice;

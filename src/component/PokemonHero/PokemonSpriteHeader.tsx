@@ -2,7 +2,7 @@ import { FC, memo } from 'react';
 import { FlexBox } from 'component/BoxLayout/Boxes';
 import Image from 'next/image';
 import { Sprites } from 'modules/pokemon/types';
-import { Typography } from '@mui/material';
+import { Typography, colors } from '@mui/material';
 import useWindowSize from 'hook/use-window-size';
 import { usePokemonPayload } from 'hook';
 import { customColor } from 'component/theme';
@@ -22,9 +22,31 @@ const shadow = `0px 14px 10px rgba(0,0,0,0.15),
 0px 24px 2px rgba(0,0,0,0.1),
 0px 34px 30px rgba(0,0,0,0.1)`;
 
+const goldShadow = `
+-1px -1px 0 #ffd700,
+1px -1px 0 #ffd700,
+-1px 1px 0 #ffd700,
+1px 1px 0 #ffd700,
+0px 0px 5px #ffd700
+`;
+
+const violetShadow = `
+-1px -1px 0 #8a2be2,
+1px -1px 0 #8a2be2,
+-1px 1px 0 #8a2be2,
+1px 1px 0 #8a2be2,
+0px 0px 5px #8a2be2
+`;
+
 const Component: FC<Props> = ({ imgSourceLink }) => {
   const { isMobile } = useWindowSize();
-  const { pokemonName, pokemonSprite, pokeDetails } = usePokemonPayload();
+  const {
+    pokemonName,
+    pokemonSprite,
+    pokeDetails,
+    isLegendaryPokemon,
+    isMythicalPokemon
+  } = usePokemonPayload();
 
   return (
     <FlexBox flexDirection={'column'}>
@@ -48,7 +70,7 @@ const Component: FC<Props> = ({ imgSourceLink }) => {
         <Typography
           variant={isMobile ? 'h6' : 'h4'}
           fontWeight={900}
-          mb={isMobile ? -2 : -3}
+          mb={-3}
           style={{
             textShadow: whiteShadow
           }}
@@ -56,17 +78,51 @@ const Component: FC<Props> = ({ imgSourceLink }) => {
         >
           {`#${pokeDetails?.id}`}
         </Typography>
-        <Typography
-          variant="h1"
-          fontWeight={900}
-          fontSize={isMobile ? 50 : 100}
-          color={customColor.highLight.main}
+        <FlexBox
+          flexDirection={'column'}
           style={{
-            textShadow: `${shadow},${whiteShadow}`
+            backgroundImage:
+              isLegendaryPokemon || isMythicalPokemon
+                ? 'url(/images/gif/shining_effect.gif)'
+                : ''
           }}
         >
-          {pokemonName?.toUpperCase()}
-        </Typography>
+          <Typography
+            variant="h1"
+            fontWeight={900}
+            fontSize={isMobile ? 50 : 100}
+            color={customColor.highLight.main}
+            style={{
+              textShadow: `${shadow},${whiteShadow}`
+            }}
+          >
+            {pokemonName?.toUpperCase()}
+          </Typography>
+          {isLegendaryPokemon && (
+            <Typography
+              mt={-2}
+              variant="h6"
+              color={colors.yellow[50]}
+              sx={{
+                textShadow: goldShadow
+              }}
+            >
+              LEGENDARY
+            </Typography>
+          )}
+          {isMythicalPokemon && (
+            <Typography
+              mt={-2}
+              variant="h6"
+              color={colors.yellow[50]}
+              sx={{
+                textShadow: violetShadow
+              }}
+            >
+              MYTHICAL
+            </Typography>
+          )}
+        </FlexBox>
         <PokemonTypeEmblem />
       </FlexBox>
     </FlexBox>
