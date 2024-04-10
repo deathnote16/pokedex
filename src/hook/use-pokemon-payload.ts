@@ -15,6 +15,7 @@ export const usePokemonPayload = () => {
     pokemonPayloadSelector.pokemonNameSelector
   );
 
+  //pokemon endpoints
   const {
     data: pokeDetails,
     isLoading,
@@ -24,16 +25,13 @@ export const usePokemonPayload = () => {
     url: `https://pokeapi.co/api/v2/pokemon/${pokemonName || 'bulbasaur'}/`
   });
 
+  //pokemon species endpoint
   const {
     data: pokeSpecies,
     isLoading: isPokeSpeciesLoading,
     isFetching: isPokeSpeciesFetching,
     isError: pokeSpeciesError
-  } = useGetPokemonSpeciesQuery({
-    url: `https://pokeapi.co/api/v2/pokemon-species/${
-      pokemonName || 'bulbasaur'
-    }/`
-  });
+  } = useGetPokemonSpeciesQuery({ url: pokeDetails?.species?.url });
 
   const pokemonSprite = useMemo(
     () => pokeDetails?.sprites?.other?.['official-artwork']?.front_default,
@@ -64,6 +62,7 @@ export const usePokemonPayload = () => {
             flavorText?.version?.name === 'omega-ruby' ||
             flavorText?.version?.name === 'black' ||
             flavorText?.version?.name === 'x' ||
+            flavorText?.version?.name === 'sun' ||
             flavorText?.version?.name === 'sword' ||
             flavorText?.version?.name === 'scarlet')
         );
