@@ -8,14 +8,14 @@ import Marquee from 'react-fast-marquee';
 type Props = { pokemonName?: string };
 
 const Component: FC<Props> = ({ pokemonName = 'BULBASAUR' }) => {
-  const { isMobile } = useWindowSize();
+  const { isMobile, isTablet } = useWindowSize();
 
   return (
     <FlexBox width={'100%'}>
       <Marquee gradient={false} speed={160} direction="left">
         <Box sx={{ mx: 30 }}>
           <Typography
-            fontSize={isMobile ? 300 : 500}
+            fontSize={isMobile ? 300 : isTablet ? 350 : 500}
             fontWeight={500}
             sx={{
               color: 'white',

@@ -15,7 +15,8 @@ const Component: FC<Props> = () => {
     pokeSpeciesFlavorText,
     isPokeSpeciesLoading,
     isPokeSpeciesFetching,
-    pokemonName
+    pokemonName,
+    pokeSpeciesError
   } = usePokemonPayload();
   const [descriptionIndex, setDescriptionIndex] = useState<number>(0);
 
@@ -87,19 +88,20 @@ const Component: FC<Props> = () => {
 
   return (
     <FlexBox>
-      {(!isPokeSpeciesLoading || !isPokeSpeciesFetching) && (
-        <FlexBox
-          justifyContent={'center'}
-          flexDirection={'column'}
-          sx={{ mt: 1, mb: 10, width: '100%' }}
-        >
-          <Typography sx={{ fontSize: '24px', fontWeight: 600 }}>
-            Description
-          </Typography>
-          <CardDescription />
-          <PokemonDescriptionButton />
-        </FlexBox>
-      )}
+      {(!isPokeSpeciesLoading || !isPokeSpeciesFetching) &&
+        !pokeSpeciesError && (
+          <FlexBox
+            justifyContent={'center'}
+            flexDirection={'column'}
+            sx={{ mt: 1, mb: 10, width: '100%' }}
+          >
+            <Typography sx={{ fontSize: '24px', fontWeight: 600 }}>
+              Description
+            </Typography>
+            <CardDescription />
+            <PokemonDescriptionButton />
+          </FlexBox>
+        )}
     </FlexBox>
   );
 };

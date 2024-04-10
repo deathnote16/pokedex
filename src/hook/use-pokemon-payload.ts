@@ -18,7 +18,8 @@ export const usePokemonPayload = () => {
   const {
     data: pokeDetails,
     isLoading,
-    isFetching
+    isFetching,
+    isError: pokeDetailsError
   } = useGetPokemonDetailsQuery({
     url: `https://pokeapi.co/api/v2/pokemon/${pokemonName || 'bulbasaur'}/`
   });
@@ -26,7 +27,8 @@ export const usePokemonPayload = () => {
   const {
     data: pokeSpecies,
     isLoading: isPokeSpeciesLoading,
-    isFetching: isPokeSpeciesFetching
+    isFetching: isPokeSpeciesFetching,
+    isError: pokeSpeciesError
   } = useGetPokemonSpeciesQuery({
     url: `https://pokeapi.co/api/v2/pokemon-species/${
       pokemonName || 'bulbasaur'
@@ -62,7 +64,8 @@ export const usePokemonPayload = () => {
             flavorText?.version?.name === 'omega-ruby' ||
             flavorText?.version?.name === 'black' ||
             flavorText?.version?.name === 'x' ||
-            flavorText?.version?.name === 'sword')
+            flavorText?.version?.name === 'sword' ||
+            flavorText?.version?.name === 'scarlet')
         );
       }),
     [pokeSpecies?.flavor_text_entries]
@@ -81,6 +84,7 @@ export const usePokemonPayload = () => {
     pokemonSprite,
     isLoading,
     isFetching,
+    pokeDetailsError,
     //Pokemon Species Data
     pokeSpecies,
     pokeSpeciesFlavorText,
@@ -88,6 +92,7 @@ export const usePokemonPayload = () => {
     isMythicalPokemon,
     isPokeSpeciesFetching,
     isPokeSpeciesLoading,
+    pokeSpeciesError,
     //========Actions and value =========
     pokemonName,
     getPokemonName

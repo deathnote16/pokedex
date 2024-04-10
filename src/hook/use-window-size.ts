@@ -24,13 +24,18 @@ const useWindowSize = () => {
   }, []);
 
   const isMobile = useMemo(() => {
-    return windowSizeWidth <= 800;
+    return windowSizeWidth <= 768;
+  }, [windowSizeWidth]);
+
+  const isTablet = useMemo(() => {
+    return windowSizeWidth >= 768 && windowSizeWidth <= 1024;
   }, [windowSizeWidth]);
 
   return {
     windowSizeWidth,
     windowSizeHeight,
-    isMobile
+    isMobile,
+    isTablet
   };
 };
 

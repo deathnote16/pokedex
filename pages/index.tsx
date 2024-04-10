@@ -11,7 +11,9 @@ const HomePage: NextPage = () => {
         <PokemonHeroSection />
       </Box>
       <Container maxWidth={'lg'}>
-        <PokemonDescription />
+        <Box mt={3}>
+          <PokemonDescription />
+        </Box>
       </Container>
     </MainLayout>
   );

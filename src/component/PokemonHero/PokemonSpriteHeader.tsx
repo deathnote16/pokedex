@@ -39,7 +39,7 @@ const violetShadow = `
 `;
 
 const Component: FC<Props> = ({ imgSourceLink }) => {
-  const { isMobile } = useWindowSize();
+  const { isMobile, isTablet } = useWindowSize();
   const {
     pokemonName,
     pokemonSprite,
@@ -54,13 +54,13 @@ const Component: FC<Props> = ({ imgSourceLink }) => {
         <Image
           src={pokemonSprite || ''}
           alt="pokemon-img"
-          width={500}
-          height={500}
+          width={isMobile ? 300 : isTablet ? 350 : 500}
+          height={isMobile ? 300 : isTablet ? 350 : 500}
         />
       </FlexBox>
       <FlexBox
         sx={{
-          mt: -15,
+          mt: isMobile ? -10 : -15,
           justifyContent: 'center',
           width: '100%',
           paddingX: isMobile ? 0 : '10rem',
@@ -70,7 +70,6 @@ const Component: FC<Props> = ({ imgSourceLink }) => {
         <Typography
           variant={isMobile ? 'h6' : 'h4'}
           fontWeight={900}
-          mb={-3}
           style={{
             textShadow: whiteShadow
           }}
@@ -90,8 +89,10 @@ const Component: FC<Props> = ({ imgSourceLink }) => {
           <Typography
             variant="h1"
             fontWeight={900}
-            fontSize={isMobile ? 50 : 100}
+            fontSize={isMobile ? 50 : isTablet ? 60 : 100}
             color={customColor.highLight.main}
+            textAlign={'center'}
+            lineHeight={0.8}
             style={{
               textShadow: `${shadow},${whiteShadow}`
             }}

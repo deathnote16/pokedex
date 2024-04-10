@@ -14,20 +14,21 @@ type Props = {};
 
 const Component: FC<Props> = () => {
   const { pokemonName, isLoading, isFetching } = usePokemonPayload();
-  const { isMobile } = useWindowSize();
+  const { isMobile, isTablet } = useWindowSize();
 
   return (
     <FlexBox
+      mt={5}
       sx={{
         width: '100%',
-        height: isMobile ? '50vh' : '100vh'
+        height: isMobile ? 'auto' : isTablet ? '50vh' : '100vh'
       }}
     >
       <FlexBox
         position={'relative'}
         style={{
           width: '100%',
-          height: isMobile ? '40vh' : '100vh',
+          height: '50vh',
           justifyContent: 'center',
           alignItems: 'center'
         }}
