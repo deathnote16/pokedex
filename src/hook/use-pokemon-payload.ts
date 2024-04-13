@@ -38,6 +38,8 @@ export const usePokemonPayload = () => {
     [pokeDetails?.sprites?.other]
   );
 
+  const pokeStats = useMemo(() => pokeDetails?.stats, [pokeDetails?.stats]);
+
   const isLegendaryPokemon = useMemo(
     () => pokeSpecies?.is_legendary,
     [pokeSpecies?.is_legendary]
@@ -81,6 +83,7 @@ export const usePokemonPayload = () => {
     //PokemonData
     pokeDetails,
     pokemonSprite,
+    pokeStats,
     isLoading,
     isFetching,
     pokeDetailsError,

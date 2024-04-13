@@ -95,7 +95,7 @@ const Component: FC<Props> = () => {
             flexDirection={'column'}
             sx={{ mt: 1, mb: 10, width: '100%' }}
           >
-            <Typography sx={{ fontSize: '24px', fontWeight: 600 }}>
+            <Typography variant="h4" sx={{ fontWeight: 600 }}>
               Description
             </Typography>
             <CardDescription />
