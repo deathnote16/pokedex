@@ -10,13 +10,13 @@ import {
 } from '@mui/material';
 import { FlexBox } from 'component/BoxLayout/Boxes';
 import { convertStatName, convertStatPercentageString } from 'utils';
-import { usePokemonPayload } from 'hook';
+import { usePokemonData } from 'hook';
 import { statColor } from 'utils';
 
 type Props = {};
 
 const Component: FC<Props> = ({}) => {
-  const { pokeStats } = usePokemonPayload();
+  const { pokeStats } = usePokemonData();
 
   return (
     <TableContainer>

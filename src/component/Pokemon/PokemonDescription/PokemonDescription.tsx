@@ -1,7 +1,7 @@
 import { FC, memo, useEffect, useState } from 'react';
 import { FlexBox } from 'component/BoxLayout/Boxes';
 import { Card, CardContent, Tooltip, Typography } from '@mui/material';
-import { usePokemonPayload } from 'hook';
+import { usePokemonData, usePokemonPayload } from 'hook';
 import { removeEscapeSequence } from 'utils';
 import { ResponsiveTypography } from 'component/typography';
 import { NextLazyImage } from 'component/image/LazyImageNext';
@@ -12,12 +12,14 @@ type Props = {};
 
 const Component: FC<Props> = () => {
   const {
-    pokeSpeciesFlavorText,
     isPokeSpeciesLoading,
     isPokeSpeciesFetching,
     pokemonName,
     pokeSpeciesError
   } = usePokemonPayload();
+
+  const { pokeSpeciesFlavorText } = usePokemonData();
+
   const [descriptionIndex, setDescriptionIndex] = useState<number>(0);
 
   const onHandleSelectedVersion = (index: number, version?: string) => {

@@ -56,6 +56,18 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
           header: {}
         };
       }
+    }),
+    getPokemonGrowthRate: builder.query<
+      PokemonGrowthResponse,
+      PokemonDetailsPayload //common payload
+    >({
+      query(data) {
+        return {
+          url: data.url || '',
+          method: `GET`,
+          header: {}
+        };
+      }
     })
 
     //====
@@ -66,5 +78,6 @@ export const {
   useGetPokemonListQuery,
   useGetPokemonDetailsQuery,
   useGetPokemonAbilityQuery,
-  useGetPokemonSpeciesQuery
+  useGetPokemonSpeciesQuery,
+  useGetPokemonGrowthRateQuery
 } = extendedPokedexApiSlice;

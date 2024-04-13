@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Sprites } from 'modules/pokemon/types';
 import { Typography, colors } from '@mui/material';
 import useWindowSize from 'hook/use-window-size';
-import { usePokemonPayload } from 'hook';
+import { usePokemonData, usePokemonPayload } from 'hook';
 import { customColor } from 'component/theme';
 import { PokemonTypeEmblem } from 'component/Pokemon/PokemonType';
 import {
@@ -19,13 +19,9 @@ type Props = { imgSourceLink?: Sprites };
 
 const Component: FC<Props> = ({ imgSourceLink }) => {
   const { isMobile, isTablet } = useWindowSize();
-  const {
-    pokemonName,
-    pokemonSprite,
-    pokeDetails,
-    isLegendaryPokemon,
-    isMythicalPokemon
-  } = usePokemonPayload();
+  const { pokemonName, pokeDetails } = usePokemonPayload();
+  const { isLegendaryPokemon, isMythicalPokemon, pokemonSprite } =
+    usePokemonData();
 
   return (
     <FlexBox flexDirection={'column'}>
