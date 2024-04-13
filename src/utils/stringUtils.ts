@@ -14,6 +14,6 @@ export const convertStatName = (stat?: string) => {
 };
 
 export const convertStatPercentageString = (stat: number) => {
-  const result = (stat / 280) * 100;
+  const result = (stat / 300) * 100;
   return result.toString();
 };
