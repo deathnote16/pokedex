@@ -18,15 +18,16 @@ type Props = {
 
 const Component: React.FC<Props> = ({ offset, onCloseAfterSelecting }) => {
   const customHeight = '80vh';
-  const { getPokemonName } = usePokemonPayload();
+  const { getPokemonName, getPokemonUrl } = usePokemonPayload();
   const { isMobile } = useWindowSize();
   const { data, isFetching, isLoading, isError } = useGetPokemonListQuery({
     limit: 30,
     offset
   });
 
-  const onHandlePressPokemonCard = (pokeName?: string) => {
+  const onHandlePressPokemonCard = (pokeName?: string, pokeUrl?: string) => {
     onCloseAfterSelecting();
+    getPokemonUrl(pokeUrl);
     getPokemonName(pokeName);
   };
 
@@ -59,7 +60,11 @@ const Component: React.FC<Props> = ({ offset, onCloseAfterSelecting }) => {
             whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
             key={pokemon?.name}
           >
-            <Box onClick={() => onHandlePressPokemonCard(pokemon?.name)}>
+            <Box
+              onClick={() =>
+                onHandlePressPokemonCard(pokemon?.name, pokemon?.url)
+              }
+            >
               <PokemonListCard pokemonList={pokemon || {}} />
             </Box>
           </motion.div>

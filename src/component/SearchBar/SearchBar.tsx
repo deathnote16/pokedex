@@ -15,7 +15,7 @@ const Component: FC<Props> = () => {
   const { data } = useGetPokemonListQuery({
     limit: 10000
   });
-  const { getPokemonName } = usePokemonPayload();
+  const { getPokemonName, getPokemonUrl } = usePokemonPayload();
   const { isMobile } = useWindowSize();
   const { isPokemonSearchBar, onToggleShowPokemonSearch } = useGlobalEvent();
   const [value, setValue] = useState<string | null>();
@@ -36,10 +36,19 @@ const Component: FC<Props> = () => {
   };
 
   useEffect(() => {
-    if (value) {
+    const pokemonObj = data?.results.find((item) => {
+      if (item?.name === value) {
+        return item?.url;
+      } else {
+        return '';
+      }
+    });
+
+    if (value && pokemonObj) {
       getPokemonName(value);
+      getPokemonUrl(pokemonObj.url);
     }
-  }, [getPokemonName, value]);
+  }, [data?.results, getPokemonName, getPokemonUrl, value]);
 
   return (
     <Box

@@ -16,23 +16,31 @@ export const usePokemonData = () => {
 
   const pokeStats = useMemo(() => pokeDetails?.stats, [pokeDetails?.stats]);
 
+  const pokemonVarieties = useMemo(() => {
+    pokeSpecies?.varieties;
+  }, [pokeSpecies?.varieties]);
+
   const pokedexData = useMemo(() => {
     const genusData = pokeSpecies?.genera?.filter(
       (genus) => genus.language?.name === 'en'
     );
     return {
       national_no: pokeDetails?.id,
-      game_indices: pokeDetails?.game_indices,
       height: pokeDetails?.height,
       weight: pokeDetails?.weight,
-      genus: genusData
+      genus: genusData,
+      color: pokeSpecies?.color,
+      pokedex_entry: pokeSpecies?.pokedex_numbers,
+      generation: pokeSpecies?.generation?.name
     };
   }, [
-    pokeDetails?.game_indices,
     pokeDetails?.height,
     pokeDetails?.id,
     pokeDetails?.weight,
-    pokeSpecies?.genera
+    pokeSpecies?.color,
+    pokeSpecies?.genera,
+    pokeSpecies?.generation?.name,
+    pokeSpecies?.pokedex_numbers
   ]);
 
   const pokemonSprite = useMemo(
@@ -68,6 +76,7 @@ export const usePokemonData = () => {
     pokeStats,
     pokedexData,
     pokemonSprite,
-    pokeSpeciesFlavorText
+    pokeSpeciesFlavorText,
+    pokemonVarieties
   };
 };

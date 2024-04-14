@@ -17,6 +17,7 @@ export const usePokemonPayload = () => {
   const pokemonName = useAppSelector(
     pokemonPayloadSelector.pokemonNameSelector
   );
+  const pokemonUrl = useAppSelector(pokemonPayloadSelector.pokemonUrlSelector);
 
   //pokemon endpoints
   const {
@@ -25,7 +26,7 @@ export const usePokemonPayload = () => {
     isFetching,
     isError: pokeDetailsError
   } = useGetPokemonDetailsQuery({
-    url: `https://pokeapi.co/api/v2/pokemon/${pokemonName || 'bulbasaur'}/`
+    url: pokemonUrl
   });
 
   //pokemon species endpoint
@@ -37,16 +38,23 @@ export const usePokemonPayload = () => {
   } = useGetPokemonSpeciesQuery({ url: pokeDetails?.species?.url });
 
   //pokemon growth endpoints
-  const {
-    data: pokeGrowth,
-    isLoading: isPokeGrowthLoading,
-    isFetching: isPokeGrowthFetching,
-    isError: pokeGrowthError
-  } = useGetPokemonGrowthRateQuery({ url: pokeDetails?.species?.url });
+  // const {
+  //   data: pokeGrowth,
+  //   isLoading: isPokeGrowthLoading,
+  //   isFetching: isPokeGrowthFetching,
+  //   isError: pokeGrowthError
+  // } = useGetPokemonGrowthRateQuery({ url: pokeSpecies?.growth_rate?.url });
 
   const getPokemonName = useCallback(
     (pokeName?: string) => {
       dispatch(pokemonPayloadAction.getPokemonName(pokeName));
+    },
+    [dispatch]
+  );
+
+  const getPokemonUrl = useCallback(
+    (pokeUrl?: string) => {
+      dispatch(pokemonPayloadAction.getPokemonUrl(pokeUrl));
     },
     [dispatch]
   );
@@ -63,12 +71,13 @@ export const usePokemonPayload = () => {
     isPokeSpeciesLoading,
     pokeSpeciesError,
     //PokemonGrowthData
-    pokeGrowth,
-    isPokeGrowthFetching,
-    isPokeGrowthLoading,
-    pokeGrowthError,
+    // pokeGrowth,
+    // isPokeGrowthFetching,
+    // isPokeGrowthLoading,
+    // pokeGrowthError,
     //========Actions and value =========
     pokemonName,
-    getPokemonName
+    getPokemonName,
+    getPokemonUrl
   };
 };
