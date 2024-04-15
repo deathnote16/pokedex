@@ -92,7 +92,7 @@ const Component: FC<Props> = ({ imgSourceLink }) => {
             </Typography>
             {isLegendaryPokemon && (
               <Typography
-                mt={-2}
+                mt={-1}
                 variant="h6"
                 color={colors.yellow[50]}
                 sx={{
