@@ -51,7 +51,7 @@ const Component: React.FC<Props> = ({}) => {
             weight={pokeDetails?.weight}
             height={pokeDetails?.height}
           />
-          <PokemonStats pokemonType={pokeDetails?.types} />
+          <PokemonStats />
         </Grid>
       </Grid>
     </Paper>

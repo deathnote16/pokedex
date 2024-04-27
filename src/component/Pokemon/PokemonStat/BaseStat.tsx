@@ -25,7 +25,9 @@ const Component: FC<Props> = ({}) => {
           {pokeStats?.map((stats, index) => (
             <TableRow key={index} sx={{ padding: 0 }}>
               <TableCell width={'5%'}>
-                {convertStatName(stats?.stat?.name)?.toUpperCase()}
+                <Typography fontWeight={500}>
+                  {convertStatName(stats?.stat?.name)?.toUpperCase()}
+                </Typography>
               </TableCell>
               <TableCell width={'95%'}>
                 <FlexBox flexDirection={'row'}>

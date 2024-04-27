@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { usePokemonPayload } from './use-pokemon-payload';
+import { PokedexData } from './types';
 
 export const usePokemonData = () => {
   const { pokeDetails, pokeSpecies } = usePokemonPayload();
@@ -20,18 +21,21 @@ export const usePokemonData = () => {
     pokeSpecies?.varieties;
   }, [pokeSpecies?.varieties]);
 
-  const pokedexData = useMemo(() => {
+  const pokedexData: PokedexData = useMemo(() => {
     const genusData = pokeSpecies?.genera?.filter(
       (genus) => genus.language?.name === 'en'
     );
     return {
-      national_no: pokeDetails?.id,
-      height: pokeDetails?.height,
-      weight: pokeDetails?.weight,
-      genus: genusData,
-      color: pokeSpecies?.color,
-      pokedex_entry: pokeSpecies?.pokedex_numbers,
-      generation: pokeSpecies?.generation?.name
+      national_no: { name: 'National ID', data: pokeDetails?.id?.toString() },
+      height: { name: 'Height', data: pokeDetails?.height?.toString() },
+      weight: { name: 'Weight', data: pokeDetails?.weight?.toString() },
+      genus: { name: 'Genus', data: genusData },
+      color: { name: 'Color', data: pokeSpecies?.color },
+      pokedex_entry: {
+        name: 'Pokedex Entry',
+        data: pokeSpecies?.pokedex_numbers
+      },
+      generation: { name: 'Generation', data: pokeSpecies?.generation }
     };
   }, [
     pokeDetails?.height,
@@ -39,7 +43,7 @@ export const usePokemonData = () => {
     pokeDetails?.weight,
     pokeSpecies?.color,
     pokeSpecies?.genera,
-    pokeSpecies?.generation?.name,
+    pokeSpecies?.generation,
     pokeSpecies?.pokedex_numbers
   ]);
 
