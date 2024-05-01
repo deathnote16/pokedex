@@ -1,24 +1,15 @@
-import { FC, memo, useMemo } from 'react';
+import { FC, memo } from 'react';
 import {
   Box,
   Typography,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
-  TableRow,
   Paper
 } from '@mui/material';
 import { FlexBox } from 'component/BoxLayout/Boxes';
-import {
-  convertDmToFoot,
-  convertStatName,
-  convertStatPercentageString,
-  fixKg,
-  removeEscapeSequence
-} from 'utils';
+import { convertDmToFoot, fixKg } from 'utils';
 import { usePokemonData } from 'hook';
-import { statColor } from 'utils';
 import { customColor } from 'component/theme';
 import { TableRowDataCard } from 'component/table';
 

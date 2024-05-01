@@ -31,10 +31,6 @@ export const usePokemonData = () => {
       weight: { name: 'Weight', data: pokeDetails?.weight?.toString() },
       genus: { name: 'Genus', data: genusData },
       color: { name: 'Color', data: pokeSpecies?.color },
-      pokedex_entry: {
-        name: 'Pokedex Entry',
-        data: pokeSpecies?.pokedex_numbers
-      },
       generation: { name: 'Generation', data: pokeSpecies?.generation }
     };
   }, [
@@ -43,8 +39,7 @@ export const usePokemonData = () => {
     pokeDetails?.weight,
     pokeSpecies?.color,
     pokeSpecies?.genera,
-    pokeSpecies?.generation,
-    pokeSpecies?.pokedex_numbers
+    pokeSpecies?.generation
   ]);
 
   const pokemonSprite = useMemo(
@@ -74,6 +69,43 @@ export const usePokemonData = () => {
     [pokeSpecies?.flavor_text_entries]
   );
 
+  const pokemonTrainingData = useMemo(() => {
+    const getEv = (pokeDetails?.stats || [])
+      .filter((stats) => stats?.effort && stats?.base_stat) // Filter stats with defined effort and base_stat
+      .map((stats) => {
+        if (stats && stats.effort && stats.stat && stats.stat.name) {
+          return `${stats.effort} ${stats.stat.name}`;
+        } else {
+          return ''; // Return empty string if stats or required properties are undefined
+        }
+      })
+      .filter((formattedStat) => formattedStat !== '')
+      .join(', ');
+
+    return {
+      ev_yield: { label: 'EV yield', data: getEv },
+      growth_rate: {
+        label: 'Growth rate',
+        data: pokeSpecies?.growth_rate?.name
+      },
+      capture_rate: { label: 'Capture rate', data: pokeSpecies?.capture_rate },
+      base_exp: {
+        label: 'Base Experience',
+        data: pokeDetails?.base_experience
+      },
+      base_happiness: {
+        label: 'Base Friendship',
+        data: pokeSpecies?.base_happiness
+      }
+    };
+  }, [
+    pokeDetails?.base_experience,
+    pokeDetails?.stats,
+    pokeSpecies?.base_happiness,
+    pokeSpecies?.capture_rate,
+    pokeSpecies?.growth_rate?.name
+  ]);
+
   return {
     isLegendaryPokemon,
     isMythicalPokemon,
@@ -81,6 +113,7 @@ export const usePokemonData = () => {
     pokedexData,
     pokemonSprite,
     pokeSpeciesFlavorText,
-    pokemonVarieties
+    pokemonVarieties,
+    pokemonTrainingData
   };
 };
