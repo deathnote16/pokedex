@@ -2,6 +2,7 @@ import { FC, memo } from 'react';
 import { convertDmToFoot, fixKg } from 'utils';
 import { usePokemonData } from 'hook';
 import { PokemonInfoTableLayout, TableRowDataCard } from 'component/table';
+import { TableRowArrayData } from 'component/table/TableRowArrayData';
 
 type Props = {};
 
@@ -13,6 +14,11 @@ const Component: FC<Props> = ({}) => {
       <TableRowDataCard
         rowHeader={pokedexData?.national_no?.name}
         rowItem={pokedexData?.national_no?.data}
+      />
+      <TableRowArrayData
+        rowHeader={pokedexData?.abilities?.name}
+        rowItemArr={pokedexData?.abilities?.data}
+        direction="row"
       />
       <TableRowDataCard
         rowHeader={pokedexData?.height?.name}

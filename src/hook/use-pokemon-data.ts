@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { usePokemonPayload } from './use-pokemon-payload';
-import { PokedexData } from './types';
+import { PokedexData } from './types/types';
 
 export const usePokemonData = () => {
   const { pokeDetails, pokeSpecies } = usePokemonPayload();
@@ -18,22 +18,31 @@ export const usePokemonData = () => {
   const pokeStats = useMemo(() => pokeDetails?.stats, [pokeDetails?.stats]);
 
   const pokemonVarieties = useMemo(() => {
-    pokeSpecies?.varieties;
+    return pokeSpecies?.varieties;
   }, [pokeSpecies?.varieties]);
 
   const pokedexData: PokedexData = useMemo(() => {
     const genusData = pokeSpecies?.genera?.filter(
       (genus) => genus.language?.name === 'en'
     );
+    const getPokemonAbilities = pokeDetails?.abilities?.map((item) => {
+      return {
+        label: item?.ability?.name,
+        url: item?.ability?.url
+      };
+    });
+
     return {
       national_no: { name: 'National ID', data: pokeDetails?.id?.toString() },
       height: { name: 'Height', data: pokeDetails?.height?.toString() },
       weight: { name: 'Weight', data: pokeDetails?.weight?.toString() },
       genus: { name: 'Genus', data: genusData },
       color: { name: 'Color', data: pokeSpecies?.color },
+      abilities: { name: 'Abilities', data: getPokemonAbilities },
       generation: { name: 'Generation', data: pokeSpecies?.generation }
     };
   }, [
+    pokeDetails?.abilities,
     pokeDetails?.height,
     pokeDetails?.id,
     pokeDetails?.weight,
@@ -70,6 +79,7 @@ export const usePokemonData = () => {
   );
 
   const pokemonTrainingData = useMemo(() => {
+    //convert EV to single array values
     const getEv = (pokeDetails?.stats || [])
       .filter((stats) => stats?.effort && stats?.base_stat) // Filter stats with defined effort and base_stat
       .map((stats) => {
@@ -82,7 +92,7 @@ export const usePokemonData = () => {
       .filter((formattedStat) => formattedStat !== '')
       .join(', ');
 
-    return {
+    const pokemonTrainingDataObj = {
       ev_yield: { label: 'EV yield', data: getEv },
       growth_rate: {
         label: 'Growth rate',
@@ -98,6 +108,8 @@ export const usePokemonData = () => {
         data: pokeSpecies?.base_happiness
       }
     };
+
+    return pokemonTrainingDataObj;
   }, [
     pokeDetails?.base_experience,
     pokeDetails?.stats,

@@ -4,7 +4,8 @@ import { ApiPayloadState } from './types';
 const initialState: ApiPayloadState = {
   pokemonUrl: 'https://pokeapi.co/api/v2/pokemon/1/',
   pokemonName: 'bulbasaur',
-  pokeIdNumber: 1
+  pokeIdNumber: 1,
+  pokemonAbilitiesUrl: ''
 };
 
 const getPokemonUrl = (
@@ -12,6 +13,13 @@ const getPokemonUrl = (
   { payload }: PayloadAction<string | undefined>
 ) => {
   state.pokemonUrl = payload;
+};
+
+const getPokemonAbilitiesUrl = (
+  state: ApiPayloadState,
+  { payload }: PayloadAction<string | undefined>
+) => {
+  state.pokemonAbilitiesUrl = payload;
 };
 
 const getPokemonName = (
@@ -31,7 +39,12 @@ const getPokeIdNumber = (
 const slice = createSlice({
   name: 'apiFilters',
   initialState,
-  reducers: { getPokemonName, getPokeIdNumber, getPokemonUrl }
+  reducers: {
+    getPokemonName,
+    getPokeIdNumber,
+    getPokemonUrl,
+    getPokemonAbilitiesUrl
+  }
 });
 
 export const actions = { ...slice.actions };

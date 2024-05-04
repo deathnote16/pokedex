@@ -26,7 +26,7 @@ const Component: FC<Props> = ({}) => {
             <TableRow key={index} sx={{ padding: 0 }}>
               <TableCell width={'5%'}>
                 <Typography fontWeight={500}>
-                  {convertStatName(stats?.stat?.name)?.toUpperCase()}
+                  {`${convertStatName(stats?.stat?.name)?.toUpperCase()}:`}
                 </Typography>
               </TableCell>
               <TableCell width={'95%'}>

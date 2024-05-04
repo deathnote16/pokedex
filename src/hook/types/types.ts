@@ -1,3 +1,4 @@
+import { CommonTypeDataWithUrl } from 'global-types';
 import {
   Color,
   Genera,
@@ -12,6 +13,7 @@ export type PokedexData = {
   genus?: GeneraType;
   color?: ColorType;
   pokedex_entry?: pokedexNumberType;
+  abilities?: PokeAbilitiesType;
   generation?: GenerationType;
 };
 
@@ -38,4 +40,14 @@ export type pokedexNumberType = {
 export type GenerationType = {
   name?: string;
   data?: Generation;
+};
+
+export type PokeAbilitiesType = {
+  name?: string;
+  data?: CommonTypeDataWithUrl[];
+};
+
+export type PokeAbilitiesMetaType = {
+  label?: string;
+  url?: string;
 };

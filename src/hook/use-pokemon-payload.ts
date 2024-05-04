@@ -6,6 +6,7 @@ import { useCallback, useMemo } from 'react';
 const {
   useGetPokemonDetailsQuery,
   useGetPokemonSpeciesQuery,
+  useGetPokemonAbilityQuery,
   useGetPokemonGrowthRateQuery
 } = modules.pokemonModule;
 
@@ -18,6 +19,9 @@ export const usePokemonPayload = () => {
     pokemonPayloadSelector.pokemonNameSelector
   );
   const pokemonUrl = useAppSelector(pokemonPayloadSelector.pokemonUrlSelector);
+  const pokemonAbilitiesUrl = useAppSelector(
+    pokemonPayloadSelector.pokemonAbilitiesUrlSelector
+  );
 
   //pokemon endpoints
   const {
@@ -36,6 +40,14 @@ export const usePokemonPayload = () => {
     isFetching: isPokeSpeciesFetching,
     isError: pokeSpeciesError
   } = useGetPokemonSpeciesQuery({ url: pokeDetails?.species?.url });
+
+  //pokemon abilties endpoint
+  const {
+    data: pokeAbilities,
+    isLoading: isLoadingAbilities,
+    isFetching: isFetchingAbilities,
+    isError: isErrorAbilities
+  } = useGetPokemonAbilityQuery({ url: pokemonAbilitiesUrl });
 
   //pokemon growth endpoints
   // const {
@@ -59,17 +71,32 @@ export const usePokemonPayload = () => {
     [dispatch]
   );
 
+  const getAbilitiesUrl = useCallback(
+    (abilityUrl?: string) => {
+      dispatch(pokemonPayloadAction.getPokemonAbilitiesUrl(abilityUrl));
+    },
+    [dispatch]
+  );
+
   return {
     //PokemonData
     pokeDetails,
     isLoading,
     isFetching,
     pokeDetailsError,
+
     //Pokemon Species Data
     pokeSpecies,
     isPokeSpeciesFetching,
     isPokeSpeciesLoading,
     pokeSpeciesError,
+
+    //pokemon abilities data
+    pokeAbilities,
+    isLoadingAbilities,
+    isFetchingAbilities,
+    isErrorAbilities,
+
     //PokemonGrowthData
     // pokeGrowth,
     // isPokeGrowthFetching,
@@ -78,6 +105,7 @@ export const usePokemonPayload = () => {
     //========Actions and value =========
     pokemonName,
     getPokemonName,
-    getPokemonUrl
+    getPokemonUrl,
+    getAbilitiesUrl
   };
 };

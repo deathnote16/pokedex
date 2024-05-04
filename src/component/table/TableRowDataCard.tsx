@@ -7,7 +7,7 @@ const Component: FC<Props> = ({ rowHeader, rowItem }) => {
   return (
     <TableRow sx={{ padding: 0 }}>
       <TableCell>
-        <Typography fontWeight={500}>{rowHeader}</Typography>
+        <Typography fontWeight={500}>{`${rowHeader}:`}</Typography>
       </TableCell>
       {Array.isArray(rowItem) && rowItem?.length > 0 ? (
         rowItem.map((item, index) => (
