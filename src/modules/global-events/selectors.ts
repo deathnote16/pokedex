@@ -13,7 +13,13 @@ const selectIsOpenPokemonList = createSelector(
   (state) => state.isOpenPokemonList
 );
 
+const selecctIsOpenPokemonAbilityDialog = createSelector(
+  globalEventSelector,
+  (state) => state.isPokemonAbilityDialog
+);
+
 export const selector = {
   selectIsOpenPokemonSearch,
-  selectIsOpenPokemonList
+  selectIsOpenPokemonList,
+  selecctIsOpenPokemonAbilityDialog
 };

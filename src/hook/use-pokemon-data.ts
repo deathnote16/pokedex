@@ -3,7 +3,7 @@ import { usePokemonPayload } from './use-pokemon-payload';
 import { PokedexData } from './types/types';
 
 export const usePokemonData = () => {
-  const { pokeDetails, pokeSpecies } = usePokemonPayload();
+  const { pokeDetails, pokeSpecies, pokeAbilities } = usePokemonPayload();
 
   const isLegendaryPokemon = useMemo(
     () => pokeSpecies?.is_legendary,
@@ -118,6 +118,16 @@ export const usePokemonData = () => {
     pokeSpecies?.growth_rate?.name
   ]);
 
+  const pokeAbilitiesData = useMemo(() => {
+    const result = pokeAbilities?.effect_entries?.find((ability) => {
+      if (ability?.language?.name === 'en') {
+        return ability?.effect;
+      } //get english version
+    });
+
+    return { name: pokeAbilities?.name, data: result };
+  }, [pokeAbilities?.effect_entries, pokeAbilities?.name]);
+
   return {
     isLegendaryPokemon,
     isMythicalPokemon,
@@ -126,6 +136,7 @@ export const usePokemonData = () => {
     pokemonSprite,
     pokeSpeciesFlavorText,
     pokemonVarieties,
-    pokemonTrainingData
+    pokemonTrainingData,
+    pokeAbilitiesData
   };
 };

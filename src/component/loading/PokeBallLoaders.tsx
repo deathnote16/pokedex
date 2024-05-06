@@ -12,9 +12,13 @@ const PokeContainer = styled('div')({
   // height: 'auto'
 });
 
-type Props = { height?: string; dimension?: number; imgSrc: string };
+type Props = { height?: string; dimension?: number; imgSrc?: string };
 
-const component: React.FC<Props> = ({ imgSrc, height, dimension }) => {
+const component: React.FC<Props> = ({
+  imgSrc = '/images/png/pokeballs2.png',
+  height,
+  dimension
+}) => {
   return (
     <PokeContainer sx={{ minHeight: height }}>
       <Image

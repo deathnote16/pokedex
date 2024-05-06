@@ -3,6 +3,7 @@ import { convertDmToFoot, fixKg } from 'utils';
 import { usePokemonData } from 'hook';
 import { PokemonInfoTableLayout, TableRowDataCard } from 'component/table';
 import { TableRowArrayData } from 'component/table/TableRowArrayData';
+import { useGlobalEvent } from 'hook/use-global-event';
 
 type Props = {};
 
@@ -18,7 +19,7 @@ const Component: FC<Props> = ({}) => {
       <TableRowArrayData
         rowHeader={pokedexData?.abilities?.name}
         rowItemArr={pokedexData?.abilities?.data}
-        direction="row"
+        direction="column"
       />
       <TableRowDataCard
         rowHeader={pokedexData?.height?.name}

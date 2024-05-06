@@ -2,6 +2,7 @@ import { FC, memo } from 'react';
 import { Box, TableCell, TableRow, Typography } from '@mui/material';
 import { AbilitiesButton } from 'component/Pokemon/Abilities';
 import { CommonTypeDataWithUrl } from 'global-types';
+import { FlexBox } from 'component/BoxLayout/Boxes';
 
 type Props = {
   rowHeader?: string;
@@ -20,11 +21,17 @@ const Component: FC<Props> = ({
         <Typography fontWeight={500}>{`${rowHeader}:`}</Typography>
       </TableCell>
       <TableCell sx={{ display: 'flex', flexDirection: direction }}>
-        {rowItemArr?.map((item, index) => (
-          <Box ml={1} key={index}>
-            <AbilitiesButton label={item?.label} url={item?.url} />
-          </Box>
-        ))}
+        <FlexBox>
+          {rowItemArr?.map((item, index) => (
+            <FlexBox ml={1} mt={1} key={index}>
+              <AbilitiesButton
+                key={index}
+                label={item?.label}
+                url={item?.url}
+              />
+            </FlexBox>
+          ))}
+        </FlexBox>
       </TableCell>
     </TableRow>
   );

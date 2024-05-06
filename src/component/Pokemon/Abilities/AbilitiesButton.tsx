@@ -3,17 +3,25 @@ import { Button, Typography } from '@mui/material';
 
 import Image from 'next/image';
 import { usePokemonPayload } from 'hook';
+import { useGlobalEvent } from 'hook/use-global-event';
 
 type Props = { label?: string; url?: string };
 
 const Component: FC<Props> = ({ label, url }) => {
   const { getAbilitiesUrl } = usePokemonPayload();
+  const { onTogglePokemonAbilityDialog } = useGlobalEvent();
+
+  const handleToggleAbilityDialog = () => {
+    getAbilitiesUrl(url || '');
+    onTogglePokemonAbilityDialog(true);
+    console.log('im clicked');
+  };
 
   return (
     <Button
-      sx={{ borderRadius: '20px' }}
+      sx={{ borderRadius: '20px', px: 3 }}
       variant="contained"
-      onClick={() => getAbilitiesUrl(url || '')}
+      onClick={handleToggleAbilityDialog}
     >
       <Image
         src={`/images/icon/pokeball_icon4.png`}
