@@ -128,6 +128,39 @@ export const usePokemonData = () => {
     return { name: pokeAbilities?.name, data: result };
   }, [pokeAbilities?.effect_entries, pokeAbilities?.name]);
 
+  const pokeBreedingData = useMemo(() => {
+    const eggGroups = pokeSpecies?.egg_groups
+      ?.map((eggGroups) => {
+        return eggGroups?.name;
+      })
+      .join(', ');
+
+    let genderString = '';
+
+    const genderRateNum =
+      pokeSpecies?.gender_rate && pokeSpecies
+        ? pokeSpecies?.gender_rate || 1
+        : -1;
+
+    if (genderRateNum >= 1) {
+      genderString = 'Can be Male or Female';
+    } else if (genderRateNum === 0) {
+      genderString = 'Only Male';
+    } else if (genderRateNum === 8) {
+      genderString = 'Only Female';
+    } else {
+      genderString = 'This pokemon is genderless';
+    }
+
+    const breedingDataObj = [
+      { label: 'Egg Groups', data: eggGroups },
+      { label: 'Gender', data: genderString },
+      { label: 'Egg Cycles', data: pokeSpecies?.hatch_counter }
+    ];
+
+    return breedingDataObj;
+  }, [pokeSpecies]);
+
   return {
     isLegendaryPokemon,
     isMythicalPokemon,
@@ -137,6 +170,7 @@ export const usePokemonData = () => {
     pokeSpeciesFlavorText,
     pokemonVarieties,
     pokemonTrainingData,
-    pokeAbilitiesData
+    pokeAbilitiesData,
+    pokeBreedingData
   };
 };

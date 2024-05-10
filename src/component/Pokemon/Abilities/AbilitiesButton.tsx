@@ -14,7 +14,6 @@ const Component: FC<Props> = ({ label, url }) => {
   const handleToggleAbilityDialog = () => {
     getAbilitiesUrl(url || '');
     onTogglePokemonAbilityDialog(true);
-    console.log('im clicked');
   };
 
   return (

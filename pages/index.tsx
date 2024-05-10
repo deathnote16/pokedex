@@ -1,5 +1,6 @@
 import { Box, Container, Grid } from '@mui/material';
 import { MainLayout } from 'component/layout';
+import { BreedingInfo } from 'component/Pokemon/Breeding';
 import { PokemonDescription } from 'component/Pokemon/PokemonDescription';
 import { PokeDexEntry } from 'component/Pokemon/PokemonDexEntry';
 import { PokemonStats } from 'component/Pokemon/PokemonStat';
@@ -18,14 +19,17 @@ const HomePage: NextPage = () => {
           <PokemonDescription />
         </Box>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={6}>
+          <Grid item xs={12} md={12} lg={6}>
             <PokeDexEntry />
+          </Grid>
+          <Grid item xs={12} md={12} lg={6}>
+            <PokemonStats />
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
             <PokemonTrainingInfo />
           </Grid>
-          <Grid item xs={12} md={12} lg={12}>
-            <PokemonStats />
+          <Grid item xs={12} md={6} lg={6}>
+            <BreedingInfo />
           </Grid>
         </Grid>
       </Container>
