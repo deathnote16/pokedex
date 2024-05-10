@@ -18,11 +18,11 @@ const HomePage: NextPage = () => {
         <Box mt={3}>
           <PokemonDescription />
         </Box>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={12} lg={6}>
+        <Grid container spacing={3} rowSpacing={{ lg: 1 }}>
+          <Grid item xs={12} md={12} lg={12}>
             <PokeDexEntry />
           </Grid>
-          <Grid item xs={12} md={12} lg={6}>
+          <Grid item xs={12} md={12} lg={12}>
             <PokemonStats />
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
