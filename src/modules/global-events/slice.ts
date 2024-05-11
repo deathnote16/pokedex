@@ -25,7 +25,6 @@ const togglePokemonAbilityDialogAction = (
   state: InitialStateType,
   { payload }: PayloadAction<{ isOpen: boolean }>
 ) => {
-  console.log('test', payload.isOpen);
   state.isPokemonAbilityDialog = payload.isOpen;
 };
 

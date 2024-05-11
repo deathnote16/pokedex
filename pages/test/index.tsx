@@ -19,13 +19,9 @@ const TestPage: FC<Props> = ({}) => {
 
   useEffect(() => {
     const targetElement = document.getElementById('div1');
-    console.log('target element', targetElement);
   }, []);
 
   useEffect(() => {
-    console.log('windows height', viewPortHeight);
-    console.log('windows width', viewPortWidth);
-
     window.addEventListener('resize', handleResize);
   }, [viewPortHeight, viewPortWidth]);
 
