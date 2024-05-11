@@ -149,7 +149,7 @@ export const usePokemonData = () => {
     } else if (genderRateNum === 8) {
       genderString = 'Only Female';
     } else {
-      genderString = 'This pokemon is genderless';
+      genderString = 'This pokemon is genderless (IS A CHAD)';
     }
 
     const breedingDataObj = [
