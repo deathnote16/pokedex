@@ -6,13 +6,20 @@ type Props = {
   isFill?: boolean;
   width?: number;
   height?: number;
+  alt?: string;
 };
 
-const Component: FC<Props> = ({ imgSrc, width, height, isFill = false }) => {
+const Component: FC<Props> = ({
+  imgSrc,
+  width,
+  height,
+  isFill = false,
+  alt = 'pokedex-image'
+}) => {
   return (
     <Image
       src={imgSrc}
-      alt="a cool image"
+      alt={alt}
       loading="lazy"
       fill={isFill}
       width={width}
