@@ -26,9 +26,10 @@ export const usePokemonPayload = () => {
   //pokemon endpoints
   const {
     data: pokeDetails,
-    isLoading,
-    isFetching,
-    isError: pokeDetailsError
+    isLoading: isPokemonDetailsLoading,
+    isFetching: isPokemonDetailFetching,
+    isError: pokeDetailsError,
+    error: pokemonDetailsStatusError
   } = useGetPokemonDetailsQuery({
     url: pokemonUrl
   });
@@ -39,7 +40,7 @@ export const usePokemonPayload = () => {
     isLoading: isPokeSpeciesLoading,
     isFetching: isPokeSpeciesFetching,
     isError: pokeSpeciesError
-  } = useGetPokemonSpeciesQuery({ url: pokeDetails?.species?.url });
+  } = useGetPokemonSpeciesQuery({ url: pokeDetails?.species?.url || '' });
 
   //pokemon abilties endpoint
   const {
@@ -47,7 +48,7 @@ export const usePokemonPayload = () => {
     isLoading: isLoadingAbilities,
     isFetching: isFetchingAbilities,
     isError: isErrorAbilities
-  } = useGetPokemonAbilityQuery({ url: pokemonAbilitiesUrl });
+  } = useGetPokemonAbilityQuery({ url: pokemonAbilitiesUrl || '' });
 
   //pokemon growth endpoints
   // const {
@@ -81,9 +82,10 @@ export const usePokemonPayload = () => {
   return {
     //PokemonData
     pokeDetails,
-    isLoading,
-    isFetching,
+    isPokemonDetailsLoading,
+    isPokemonDetailFetching,
     pokeDetailsError,
+    pokemonDetailsStatusError,
 
     //Pokemon Species Data
     pokeSpecies,

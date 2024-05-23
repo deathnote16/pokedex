@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ApiPayloadState } from './types';
 
 const initialState: ApiPayloadState = {
-  pokemonUrl: 'https://pokeapi.co/api/v2/pokemon/1/',
+  pokemonUrl: '',
   pokemonName: 'bulbasaur',
   pokeIdNumber: 1,
   pokemonAbilitiesUrl: ''

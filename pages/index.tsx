@@ -6,11 +6,19 @@ import { PokeDexEntry } from 'component/Pokemon/PokemonDexEntry';
 import { PokemonStats } from 'component/Pokemon/PokemonStat';
 import { PokemonTrainingInfo } from 'component/Pokemon/PokemonTrainingInfo';
 import { PokemonHeroSection } from 'component/PokemonHero/PokemonHeroSection';
+import { usePokemonPayload } from 'hook';
 import useWindowSize from 'hook/use-window-size';
 import { NextPage } from 'next';
+import { useEffect } from 'react';
 
 const HomePage: NextPage = () => {
   const { isMobile } = useWindowSize();
+  const { getPokemonUrl } = usePokemonPayload();
+
+  useEffect(() => {
+    getPokemonUrl('https://pokeapi.co/api/v2/pokemon/1/');
+  }, [getPokemonUrl]);
+
   return (
     <MainLayout>
       <Box zIndex={99}>

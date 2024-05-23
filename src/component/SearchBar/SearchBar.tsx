@@ -6,12 +6,14 @@ import { modules } from 'modules';
 import SearchIcon from '@mui/icons-material/Search';
 import useWindowSize from 'hook/use-window-size';
 import { useGlobalEvent } from 'hook/use-global-event';
+import { useRouter } from 'next/router';
 
 const { useGetPokemonListQuery } = modules.pokemonModule;
 
 type Props = {};
 
 const Component: FC<Props> = () => {
+  const router = useRouter();
   const { data } = useGetPokemonListQuery({
     limit: 10000
   });
@@ -36,19 +38,12 @@ const Component: FC<Props> = () => {
   };
 
   useEffect(() => {
-    const pokemonObj = data?.results.find((item) => {
-      if (item?.name === value) {
-        return item?.url;
-      } else {
-        return '';
-      }
-    });
-
-    if (value && pokemonObj) {
+    if (value) {
+      router.replace(`/pokemon/${value}`);
       getPokemonName(value);
-      getPokemonUrl(pokemonObj.url);
+      setValue('');
     }
-  }, [data?.results, getPokemonName, getPokemonUrl, value]);
+  }, [getPokemonName, router, value]);
 
   return (
     <Box

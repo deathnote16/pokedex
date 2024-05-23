@@ -1,13 +1,11 @@
 import React from 'react';
-import { Box, Drawer, Paper } from '@mui/material';
-import { styled } from '@mui/system';
+import { Box, Paper } from '@mui/material';
 import { modules } from 'modules';
-
 import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
-import { usePokemonPayload } from 'hook';
 import { PokemonListCard } from './PokemonListCard';
 import useWindowSize from 'hook/use-window-size';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 
 const { useGetPokemonListQuery } = modules.pokemonModule;
 
@@ -18,17 +16,16 @@ type Props = {
 
 const Component: React.FC<Props> = ({ offset, onCloseAfterSelecting }) => {
   const customHeight = '80vh';
-  const { getPokemonName, getPokemonUrl } = usePokemonPayload();
+  const router = useRouter();
   const { isMobile } = useWindowSize();
-  const { data, isFetching, isLoading, isError } = useGetPokemonListQuery({
+  const { data, isFetching, isLoading } = useGetPokemonListQuery({
     limit: 30,
     offset
   });
 
-  const onHandlePressPokemonCard = (pokeName?: string, pokeUrl?: string) => {
+  const onHandlePressPokemonCard = (pokeName?: string) => {
     onCloseAfterSelecting();
-    getPokemonUrl(pokeUrl);
-    getPokemonName(pokeName);
+    router.push(`/pokemon/${pokeName}`);
   };
 
   return (
@@ -60,11 +57,7 @@ const Component: React.FC<Props> = ({ offset, onCloseAfterSelecting }) => {
             whileTap={{ scale: 0.95, transition: { duration: 0.1 } }}
             key={pokemon?.name}
           >
-            <Box
-              onClick={() =>
-                onHandlePressPokemonCard(pokemon?.name, pokemon?.url)
-              }
-            >
+            <Box onClick={() => onHandlePressPokemonCard(pokemon?.name)}>
               <PokemonListCard pokemonList={pokemon || {}} />
             </Box>
           </motion.div>
