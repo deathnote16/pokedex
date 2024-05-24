@@ -23,9 +23,15 @@ const pokemonAbilitiesUrlSelector = createSelector(
   (state) => state.pokemonAbilitiesUrl
 );
 
+const pokemonTypesSelector = createSelector(
+  selectApiPayload,
+  (state) => state.pokemonType
+);
+
 export const selectors = {
   pokemonNameSelector,
   pokemonIdNumberSelector,
   pokemonUrlSelector,
-  pokemonAbilitiesUrlSelector
+  pokemonAbilitiesUrlSelector,
+  pokemonTypesSelector
 };

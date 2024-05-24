@@ -7,6 +7,7 @@ const {
   useGetPokemonDetailsQuery,
   useGetPokemonSpeciesQuery,
   useGetPokemonAbilityQuery,
+  useGetPokemonTypeQuery,
   useGetPokemonGrowthRateQuery
 } = modules.pokemonModule;
 
@@ -21,6 +22,9 @@ export const usePokemonPayload = () => {
   const pokemonUrl = useAppSelector(pokemonPayloadSelector.pokemonUrlSelector);
   const pokemonAbilitiesUrl = useAppSelector(
     pokemonPayloadSelector.pokemonAbilitiesUrlSelector
+  );
+  const pokemonTypesName = useAppSelector(
+    pokemonPayloadSelector.pokemonTypesSelector
   );
 
   //pokemon endpoints
@@ -49,6 +53,14 @@ export const usePokemonPayload = () => {
     isFetching: isFetchingAbilities,
     isError: isErrorAbilities
   } = useGetPokemonAbilityQuery({ url: pokemonAbilitiesUrl || '' });
+
+  //pokemon type endpoint
+  const {
+    data: pokemonTypes,
+    isLoading: isTypesLoading,
+    isFetching: isTypesFetching,
+    isError: isTypesError
+  } = useGetPokemonTypeQuery({ pokeType: pokemonTypesName || '' });
 
   //pokemon growth endpoints
   // const {
@@ -79,6 +91,13 @@ export const usePokemonPayload = () => {
     [dispatch]
   );
 
+  const getPokemonTypes = useCallback(
+    (pokeType?: string) => {
+      dispatch(pokemonPayloadAction.getPokemonType(pokeType));
+    },
+    [dispatch]
+  );
+
   return {
     //PokemonData
     pokeDetails,
@@ -99,6 +118,12 @@ export const usePokemonPayload = () => {
     isFetchingAbilities,
     isErrorAbilities,
 
+    //pokemon types data
+    pokemonTypes,
+    isTypesLoading,
+    isTypesFetching,
+    isTypesError,
+
     //PokemonGrowthData
     // pokeGrowth,
     // isPokeGrowthFetching,
@@ -108,6 +133,7 @@ export const usePokemonPayload = () => {
     pokemonName,
     getPokemonName,
     getPokemonUrl,
-    getAbilitiesUrl
+    getAbilitiesUrl,
+    getPokemonTypes
   };
 };

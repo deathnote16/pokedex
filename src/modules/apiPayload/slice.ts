@@ -5,7 +5,8 @@ const initialState: ApiPayloadState = {
   pokemonUrl: '',
   pokemonName: 'bulbasaur',
   pokeIdNumber: 1,
-  pokemonAbilitiesUrl: ''
+  pokemonAbilitiesUrl: '',
+  pokemonType: ''
 };
 
 const getPokemonUrl = (
@@ -36,6 +37,13 @@ const getPokeIdNumber = (
   state.pokeIdNumber = payload;
 };
 
+const getPokemonType = (
+  state: ApiPayloadState,
+  { payload }: PayloadAction<string | undefined>
+) => {
+  state.pokemonType = payload;
+};
+
 const slice = createSlice({
   name: 'apiFilters',
   initialState,
@@ -43,7 +51,8 @@ const slice = createSlice({
     getPokemonName,
     getPokeIdNumber,
     getPokemonUrl,
-    getPokemonAbilitiesUrl
+    getPokemonAbilitiesUrl,
+    getPokemonType
   }
 });
 

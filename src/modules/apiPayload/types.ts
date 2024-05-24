@@ -3,4 +3,5 @@ export type ApiPayloadState = {
   pokemonAbilitiesUrl?: string;
   pokemonName?: string;
   pokeIdNumber?: number;
+  pokemonType?: string;
 };
