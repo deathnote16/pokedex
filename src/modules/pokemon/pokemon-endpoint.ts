@@ -81,7 +81,7 @@ export const extendedPokedexApiSlice = pokemonApi.injectEndpoints({
     >({
       query(data) {
         return {
-          url: data.pokeType || '',
+          url: `https://pokeapi.co/api/v2/type/${data.pokeType}` || '',
           method: `GET`,
           header: {}
         };

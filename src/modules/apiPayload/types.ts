@@ -5,3 +5,7 @@ export type ApiPayloadState = {
   pokeIdNumber?: number;
   pokemonType?: string;
 };
+
+export type PokemonTypesPayload = {
+  pokeType?: string;
+};

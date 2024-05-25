@@ -131,6 +131,7 @@ export const usePokemonPayload = () => {
     // pokeGrowthError,
     //========Actions and value =========
     pokemonName,
+    pokemonTypesName,
     getPokemonName,
     getPokemonUrl,
     getAbilitiesUrl,

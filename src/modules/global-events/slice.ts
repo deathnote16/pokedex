@@ -4,7 +4,8 @@ import { InitialStateType } from '.';
 const initialState: InitialStateType = {
   isOpenPokemonSearch: false,
   isOpenPokemonList: false,
-  isPokemonAbilityDialog: false
+  isPokemonAbilityDialog: false,
+  isPokemonTypeDialog: false
 };
 
 const togglePokemonSearchAction = (
@@ -28,13 +29,21 @@ const togglePokemonAbilityDialogAction = (
   state.isPokemonAbilityDialog = payload.isOpen;
 };
 
+const togglePokemonTypeDialogAction = (
+  state: InitialStateType,
+  { payload }: PayloadAction<{ isOpen: boolean }>
+) => {
+  state.isPokemonTypeDialog = payload.isOpen;
+};
+
 const slice = createSlice({
   name: 'eventSlice',
   initialState,
   reducers: {
     togglePokemonSearchAction,
     togglePokemonListAction,
-    togglePokemonAbilityDialogAction
+    togglePokemonAbilityDialogAction,
+    togglePokemonTypeDialogAction
   }
 });
 

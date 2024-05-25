@@ -5,6 +5,7 @@ import { PokemonListV2 } from './PokemonListV2';
 import { PokemonList, PokemonListDialog } from 'component/Pokemon/PokemonList';
 import { Drawer } from '@mui/material';
 import { AbilityInfoDialog } from './Dialogs/AbilityInfoDialog';
+import { PokemonTypeDialog } from './Dialogs/PokemonTypeDialog';
 
 const Component = () => {
   const { isPokemonSearchBar } = useGlobalEvent();
@@ -14,6 +15,7 @@ const Component = () => {
       <SearchBarDialog isOpen={isPokemonSearchBar} />
       <PokemonListDialog />
       <AbilityInfoDialog />
+      <PokemonTypeDialog />
     </Fragment>
   );
 };

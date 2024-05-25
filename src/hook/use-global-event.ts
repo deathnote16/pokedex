@@ -20,6 +20,10 @@ export const useGlobalEvent = () => {
     globalEventSelector.selecctIsOpenPokemonAbilityDialog
   );
 
+  const isPokemonTypeDialog = useAppSelector(
+    globalEventSelector.selectIsPokemonTypeDialog
+  );
+
   const onToggleShowPokemonSearch = (isOpen: boolean) => {
     dispatch(globalEventAction.togglePokemonSearchAction({ isOpen }));
   };
@@ -32,6 +36,10 @@ export const useGlobalEvent = () => {
     dispatch(globalEventAction.togglePokemonAbilityDialogAction({ isOpen }));
   };
 
+  const onTogglePokemonTypeDialog = (isOpen: boolean) => {
+    dispatch(globalEventAction.togglePokemonTypeDialogAction({ isOpen }));
+  };
+
   return {
     isPokemonSearchBar,
     onToggleShowPokemonSearch,
@@ -40,6 +48,9 @@ export const useGlobalEvent = () => {
     onToggleShowPokemonList,
 
     isPokemonAbilityDialog,
-    onTogglePokemonAbilityDialog
+    onTogglePokemonAbilityDialog,
+
+    isPokemonTypeDialog,
+    onTogglePokemonTypeDialog
   };
 };

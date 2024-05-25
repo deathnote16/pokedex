@@ -3,7 +3,8 @@ import { usePokemonPayload } from './use-pokemon-payload';
 import { PokedexData } from './types/types';
 
 export const usePokemonData = () => {
-  const { pokeDetails, pokeSpecies, pokeAbilities } = usePokemonPayload();
+  const { pokeDetails, pokeSpecies, pokeAbilities, pokemonTypes } =
+    usePokemonPayload();
 
   const isLegendaryPokemon = useMemo(
     () => pokeSpecies?.is_legendary,
@@ -161,6 +162,37 @@ export const usePokemonData = () => {
     return breedingDataObj;
   }, [pokeSpecies]);
 
+  const pokemonTypesData = useMemo(() => {
+    const typeData = [
+      {
+        label: 'Effective Against',
+        data: pokemonTypes?.damage_relations?.double_damage_to
+      },
+      {
+        label: 'Weak Against',
+        data: pokemonTypes?.damage_relations?.double_damage_from
+      },
+      {
+        label: 'Less Damage To',
+        data: pokemonTypes?.damage_relations?.half_damage_to
+      },
+      {
+        label: 'Less Damage From',
+        data: pokemonTypes?.damage_relations?.half_damage_from
+      },
+      {
+        label: 'No Damage To',
+        data: pokemonTypes?.damage_relations?.no_damage_to
+      },
+      {
+        label: 'No Damage From',
+        data: pokemonTypes?.damage_relations?.no_damage_from
+      }
+    ];
+
+    return typeData;
+  }, [pokemonTypes?.damage_relations]);
+
   return {
     isLegendaryPokemon,
     isMythicalPokemon,
@@ -171,6 +203,7 @@ export const usePokemonData = () => {
     pokemonVarieties,
     pokemonTrainingData,
     pokeAbilitiesData,
-    pokeBreedingData
+    pokeBreedingData,
+    pokemonTypesData
   };
 };

@@ -8,12 +8,11 @@ import { usePokemonPayload } from 'hook';
 import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
 import useWindowSize from 'hook/use-window-size';
 
-const { useGetPokemonDetailsQuery } = modules.pokemonModule;
-
 type Props = {};
 
 const Component: FC<Props> = () => {
-  const { pokemonName, isLoading, isFetching } = usePokemonPayload();
+  const { pokemonName, isPokemonDetailsLoading, isPokemonDetailFetching } =
+    usePokemonPayload();
   const { isMobile, isTablet } = useWindowSize();
 
   return (
@@ -33,8 +32,8 @@ const Component: FC<Props> = () => {
           alignItems: 'center'
         }}
       >
-        {isLoading ||
-          (isFetching ? (
+        {isPokemonDetailsLoading ||
+          (isPokemonDetailFetching ? (
             <PokeballLoaders
               imgSrc={`/images/png/pokeballs2.png`}
               height={'40vh'}

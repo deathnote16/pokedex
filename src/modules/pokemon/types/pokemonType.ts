@@ -12,40 +12,15 @@ export type PokeTypeResponse = {
 };
 
 export type DamageRelations = {
-  double_damage_from?: DoubleDamageFrom[];
-  double_damage_to?: DoubleDamageTo[];
-  half_damage_from?: HalfDamageFrom[];
-  half_damage_to?: HalfDamageTo[];
-  no_damage_from?: NoDamageFrom[];
-  no_damage_to?: NoDamageTo[];
+  double_damage_from?: CommonTypeDamage[];
+  double_damage_to?: CommonTypeDamage[];
+  half_damage_from?: CommonTypeDamage[];
+  half_damage_to?: CommonTypeDamage[];
+  no_damage_from?: CommonTypeDamage[];
+  no_damage_to?: CommonTypeDamage[];
 };
 
-export type DoubleDamageFrom = {
-  name?: string;
-  url?: string;
-};
-
-export type DoubleDamageTo = {
-  name?: string;
-  url?: string;
-};
-
-export type HalfDamageFrom = {
-  name?: string;
-  url?: string;
-};
-
-export type HalfDamageTo = {
-  name?: string;
-  url?: string;
-};
-
-export type NoDamageFrom = {
-  name?: string;
-  url?: string;
-};
-
-export type NoDamageTo = {
+export type CommonTypeDamage = {
   name?: string;
   url?: string;
 };

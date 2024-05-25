@@ -18,8 +18,14 @@ const selecctIsOpenPokemonAbilityDialog = createSelector(
   (state) => state.isPokemonAbilityDialog
 );
 
+const selectIsPokemonTypeDialog = createSelector(
+  globalEventSelector,
+  (state) => state.isPokemonTypeDialog
+);
+
 export const selector = {
   selectIsOpenPokemonSearch,
   selectIsOpenPokemonList,
-  selecctIsOpenPokemonAbilityDialog
+  selecctIsOpenPokemonAbilityDialog,
+  selectIsPokemonTypeDialog
 };

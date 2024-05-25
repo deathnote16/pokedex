@@ -1,21 +1,4 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Card,
-  Grid,
-  IconButton,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Tooltip,
-  TooltipProps,
-  Typography,
-  tooltipClasses
-} from '@mui/material';
+import { Box, Button, ButtonGroup, Card } from '@mui/material';
 import { Ability, Type } from 'modules/pokemon/types';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { capitalize } from 'lodash';
