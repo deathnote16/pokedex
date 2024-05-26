@@ -1,16 +1,13 @@
 import { FC, memo } from 'react';
-import { Box, Dialog, Typography } from '@mui/material';
-import { FlexBox } from 'component/BoxLayout/Boxes';
+import { Box, Dialog, IconButton, Typography } from '@mui/material';
 import { TitleWithIcon } from 'component/label';
 import { usePokemonData, usePokemonPayload } from 'hook';
 import { useGlobalEvent } from 'hook/use-global-event';
-import { NextLazyImage } from 'component/image/LazyImageNext';
 import useWindowSize from 'hook/use-window-size';
-import { capitalize } from 'lodash';
-import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
-import { customColor } from 'component/theme';
-import { PokemonTypeEmblem, TypeEmblem } from 'component/Pokemon/PokemonType';
+import { TypeEmblem } from 'component/Pokemon/PokemonType';
 import { getPokemonColorType } from 'utils';
+import DisabledByDefaultRoundedIcon from '@mui/icons-material/DisabledByDefaultRounded';
+import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
 
 type Props = {};
 
@@ -24,40 +21,55 @@ const Component: FC<Props> = () => {
   return (
     <Dialog
       open={isPokemonTypeDialog}
-      maxWidth="md"
+      maxWidth="sm"
       fullWidth
       onClose={() => onTogglePokemonTypeDialog(false)}
     >
-      <FlexBox
-        sx={{
-          padding: '2rem',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          width: '100%'
-        }}
-      >
+      {isTypesFetching || isTypesLoading ? (
+        <Box justifyContent={'center'} alignItems={'center'} py={10}>
+          <PokeballLoaders dimension={150} />
+        </Box>
+      ) : (
         <Box
           sx={{
-            background: getPokemonColorType(pokemonTypesName),
-            width: '100%',
-            padding: 1,
-            mb: 1
+            padding: '2rem',
+            flexDirection: 'column',
+            position: 'relative'
           }}
         >
-          <Typography variant="h5" fontWeight={700} color="white">
-            {`${pokemonTypesName?.toUpperCase() || ''} TYPE`}
-          </Typography>
-        </Box>
-
-        {pokemonTypesData.map((types, index) => (
-          <Box key={index} my={1}>
-            {types?.data && types?.data?.length > 0 && (
-              <TitleWithIcon variant="h6" label={types?.label} />
-            )}
-            <TypeEmblem dataArray={types?.data || []} />
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: 0,
+              right: 0
+            }}
+            onClick={() => onTogglePokemonTypeDialog(false)}
+          >
+            <DisabledByDefaultRoundedIcon />
+          </IconButton>
+          <Box
+            sx={{
+              background: getPokemonColorType(pokemonTypesName),
+              padding: 1,
+              mt: 1,
+              mb: 1
+            }}
+          >
+            <Typography variant="h5" fontWeight={700} color="white">
+              {`${pokemonTypesName?.toUpperCase() || ''} TYPE`}
+            </Typography>
           </Box>
-        ))}
-      </FlexBox>
+
+          {pokemonTypesData.map((types, index) => (
+            <Box key={index} my={2}>
+              {types?.data && types?.data?.length > 0 && (
+                <TitleWithIcon variant="h6" label={types?.label} />
+              )}
+              <TypeEmblem dataArray={types?.data || []} variant="h6" />
+            </Box>
+          ))}
+        </Box>
+      )}
     </Dialog>
   );
 };

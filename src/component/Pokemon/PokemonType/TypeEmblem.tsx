@@ -10,6 +10,7 @@ import { CommonTypeDamage } from 'modules/pokemon/types/pokemonType';
 type Props = {
   width?: string;
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  fontSize?: string | number;
   pokeType?: string;
   dataArray?: CommonTypeDamage[];
 };
@@ -18,7 +19,8 @@ const Component: FC<Props> = ({
   width = '120px',
   variant = 'h6',
   pokeType,
-  dataArray
+  dataArray,
+  fontSize = '16px'
 }) => {
   return (
     <FlexBox>
@@ -39,7 +41,11 @@ const Component: FC<Props> = ({
                 '&:hover': { background: customColor.highLight.main }
               }}
             >
-              <Typography variant={variant} fontWeight={500}>
+              <Typography
+                variant={variant}
+                fontSize={fontSize}
+                fontWeight={700}
+              >
                 {type.name}
               </Typography>
             </Button>

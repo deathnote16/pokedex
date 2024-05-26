@@ -1,5 +1,5 @@
 import { FC, memo } from 'react';
-import { Dialog, Typography } from '@mui/material';
+import { Dialog, IconButton, Typography } from '@mui/material';
 import { FlexBox } from 'component/BoxLayout/Boxes';
 import { TitleWithIcon } from 'component/label';
 import { usePokemonData, usePokemonPayload } from 'hook';
@@ -8,6 +8,7 @@ import { NextLazyImage } from 'component/image/LazyImageNext';
 import useWindowSize from 'hook/use-window-size';
 import { capitalize } from 'lodash';
 import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
+import DisabledByDefaultRoundedIcon from '@mui/icons-material/DisabledByDefaultRounded';
 
 type Props = {};
 
@@ -25,12 +26,23 @@ const Component: FC<Props> = () => {
       fullWidth
       onClose={() => onTogglePokemonAbilityDialog(false)}
     >
+      <IconButton
+        sx={{
+          position: 'absolute',
+          top: 0,
+          right: 0
+        }}
+        onClick={() => onTogglePokemonAbilityDialog(false)}
+      >
+        <DisabledByDefaultRoundedIcon />
+      </IconButton>
       <FlexBox
         display={'flex'}
         justifyContent={'center'}
         flexDirection={'row'}
-        p={3}
+        p={1}
         maxWidth={'100%'}
+        maxHeight={'500px'}
       >
         <FlexBox>
           <NextLazyImage
