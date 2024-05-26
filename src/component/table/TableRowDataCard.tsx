@@ -6,17 +6,17 @@ type Props = { rowHeader?: string; rowItem?: string | number | any[] };
 const Component: FC<Props> = ({ rowHeader, rowItem }) => {
   return (
     <TableRow sx={{ padding: 0 }}>
-      <TableCell>
+      <TableCell sx={{ padding: 1 }}>
         <Typography fontWeight={500}>{`${rowHeader}:`}</Typography>
       </TableCell>
       {Array.isArray(rowItem) && rowItem?.length > 0 ? (
         rowItem.map((item, index) => (
-          <TableCell key={index}>
+          <TableCell key={index} sx={{ background: 'yellow' }}>
             <Typography>{item}</Typography>
           </TableCell>
         ))
       ) : (
-        <TableCell>
+        <TableCell sx={{ padding: 1 }}>
           <Typography>{rowItem}</Typography>
         </TableCell>
       )}
