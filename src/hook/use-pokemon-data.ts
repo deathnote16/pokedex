@@ -1,6 +1,9 @@
 import { useMemo } from 'react';
 import { usePokemonPayload } from './use-pokemon-payload';
 import { PokedexData } from './types/types';
+import { cloneDeep } from 'lodash';
+import { MoveLearnMethodEnum } from 'constant/enum';
+import { Mfe } from 'modules/pokemon/types';
 
 export const usePokemonData = () => {
   const { pokeDetails, pokeSpecies, pokeAbilities, pokemonTypes } =
@@ -193,6 +196,85 @@ export const usePokemonData = () => {
     return typeData;
   }, [pokemonTypes?.damage_relations]);
 
+  //======= pokemon moves =======
+  const pokemonMoveSetData = useMemo(() => {
+    const clonedPokemonMove = cloneDeep(pokeDetails?.moves);
+
+    const eggMoves = clonedPokemonMove?.reduce(
+      (accumulator: any[], current) => {
+        const hasEggMoves = current?.version_group_details?.some(
+          (someEgg) =>
+            someEgg?.move_learn_method?.name === MoveLearnMethodEnum.Egg
+        );
+
+        if (hasEggMoves) {
+          accumulator?.push(current);
+        }
+
+        return accumulator;
+      },
+      []
+    );
+
+    const machineMoves = clonedPokemonMove?.reduce(
+      (accumulator: any[], current) => {
+        const hasMachineMoves = current?.version_group_details?.some(
+          (someEgg) =>
+            someEgg?.move_learn_method?.name === MoveLearnMethodEnum.Machine
+        );
+
+        if (hasMachineMoves) {
+          accumulator?.push(current?.move);
+        }
+
+        return accumulator;
+      },
+      []
+    );
+
+    const levelMoves = clonedPokemonMove?.reduce(
+      (accumulator: any[], current) => {
+        const hasLevelMoves = current?.version_group_details?.some(
+          (someEgg) =>
+            someEgg?.move_learn_method?.name === MoveLearnMethodEnum.Level
+        );
+
+        if (hasLevelMoves) {
+          accumulator?.push({
+            move: current?.move,
+            level_learned: current?.version_group_details
+          });
+        }
+
+        return accumulator;
+      },
+      []
+    );
+
+    const tutorMoves = clonedPokemonMove?.reduce(
+      (accumulator: any[], current) => {
+        const hasTutorMoves = current?.version_group_details?.some(
+          (someEgg) =>
+            someEgg?.move_learn_method?.name === MoveLearnMethodEnum.Tutor
+        );
+
+        if (hasTutorMoves) {
+          accumulator?.push(current?.move);
+        }
+
+        return accumulator;
+      },
+      []
+    );
+
+    return [
+      { label: 'egg move', data: eggMoves },
+      { label: 'machine move', data: machineMoves },
+      { label: 'level move', data: levelMoves },
+      { label: 'tutor move', data: tutorMoves }
+    ];
+  }, [pokeDetails?.moves]);
+
   return {
     isLegendaryPokemon,
     isMythicalPokemon,
@@ -204,6 +286,7 @@ export const usePokemonData = () => {
     pokemonTrainingData,
     pokeAbilitiesData,
     pokeBreedingData,
-    pokemonTypesData
+    pokemonTypesData,
+    pokemonMoveSetData
   };
 };
