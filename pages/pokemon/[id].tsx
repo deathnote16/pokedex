@@ -2,6 +2,7 @@ import { Box, Container, Grid } from '@mui/material';
 import { MainLayout } from 'component/layout';
 import { PageLoaders } from 'component/loading/PageLoaders';
 import { BreedingInfo } from 'component/Pokemon/Breeding';
+import { MoveTabs } from 'component/Pokemon/Moves/MoveTabs';
 import { PokemonDescription } from 'component/Pokemon/PokemonDescription';
 import { PokeDexEntry } from 'component/Pokemon/PokemonDexEntry';
 import { PokemonStats } from 'component/Pokemon/PokemonStat';
@@ -73,6 +74,9 @@ const PokemonPage: NextPage = () => {
             <Box mt={1}>
               <BreedingInfo />
             </Box>
+          </Grid>
+          <Grid md={12}>
+            <MoveTabs />
           </Grid>
         </Grid>
       </Container>
