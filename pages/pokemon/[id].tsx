@@ -1,23 +1,17 @@
 import { Box, Container, Grid } from '@mui/material';
 import { MainLayout } from 'component/layout';
 import { PageLoaders } from 'component/loading/PageLoaders';
-import { BreedingInfo } from 'component/Pokemon/Breeding';
-import { MoveTabs } from 'component/Pokemon/Moves/MoveTabs';
-import { PokemonDescription } from 'component/Pokemon/PokemonDescription';
-import { PokeDexEntry } from 'component/Pokemon/PokemonDexEntry';
-import { PokemonStats } from 'component/Pokemon/PokemonStat';
-import { PokemonTrainingInfo } from 'component/Pokemon/PokemonTrainingInfo';
-import { PokemonHeroSection } from 'component/PokemonHero/PokemonHeroSection';
+import { PokemonSummarySection } from 'component/sections';
+import { PokemonDescriptionSection } from 'component/sections/pokemon/pokemonDescriptionSection';
+import { PokemonHeroSection } from 'component/sections/pokemon/pokemonHeroSection';
 import { pokemonDetailUrl } from 'constant/pokemon/pokemonUrl';
 import { usePokemonPayload } from 'hook';
-import useWindowSize from 'hook/use-window-size';
 
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 
 const PokemonPage: NextPage = () => {
-  const { isMobile } = useWindowSize();
   const router = useRouter();
   const memoRouter = useMemo(() => router.query.id, [router.query.id]);
 
@@ -57,28 +51,9 @@ const PokemonPage: NextPage = () => {
       </Box>
       <Container maxWidth={'lg'}>
         <Box mt={1}>
-          <PokemonDescription />
+          <PokemonDescriptionSection />
         </Box>
-        <Grid container spacing={1} rowSpacing={{ lg: 1 }}>
-          <Grid item xs={12} md={12} lg={6}>
-            <PokeDexEntry />
-            <Box mt={1}>
-              <PokemonTrainingInfo />
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={12} lg={6}>
-            <Box mt={isMobile ? 1 : 0}>
-              <PokemonStats />
-            </Box>
-
-            <Box mt={1}>
-              <BreedingInfo />
-            </Box>
-          </Grid>
-          <Grid md={12}>
-            <MoveTabs />
-          </Grid>
-        </Grid>
+        <PokemonSummarySection />
       </Container>
     </MainLayout>
   );

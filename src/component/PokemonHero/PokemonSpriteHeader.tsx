@@ -115,7 +115,7 @@ const Component: FC<Props> = ({ imgSourceLink }) => {
               </Typography>
             )}
           </FlexBox>
-          <PokemonTypeEmblem />
+          <PokemonTypeEmblem noClick={false} />
         </FlexBox>
       </motion.div>
     </FlexBox>

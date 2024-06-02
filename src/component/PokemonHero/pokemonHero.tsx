@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import { FlexBox } from 'component/BoxLayout/Boxes';
 import { PokemonNameBg } from 'component/Pokemon/PokemonNameHeader';
 import { PokemonSpriteHeader } from './PokemonSpriteHeader';
-import { modules } from 'modules';
 import { usePokemonPayload } from 'hook';
 import { PokeballLoaders } from 'component/loading/PokeBallLoaders';
 import useWindowSize from 'hook/use-window-size';
@@ -55,4 +54,4 @@ const Component: FC<Props> = () => {
   );
 };
 
-export const PokemonHeroSection = memo(Component);
+export const PokemonHero = memo(Component);

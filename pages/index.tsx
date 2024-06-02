@@ -5,7 +5,7 @@ import { PokemonDescription } from 'component/Pokemon/PokemonDescription';
 import { PokeDexEntry } from 'component/Pokemon/PokemonDexEntry';
 import { PokemonStats } from 'component/Pokemon/PokemonStat';
 import { PokemonTrainingInfo } from 'component/Pokemon/PokemonTrainingInfo';
-import { PokemonHeroSection } from 'component/PokemonHero/PokemonHeroSection';
+import { PokemonHeroSection } from 'component/sections/pokemon/pokemonHeroSection';
 import { usePokemonPayload } from 'hook';
 import useWindowSize from 'hook/use-window-size';
 import { NextPage } from 'next';
