@@ -18,7 +18,10 @@
     "inlineSources": true,
     "sourceRoot": "/",
     "paths": {
-      "styles/*": ["styles/*"]
+      "styles/*": ["styles/*"],
+      "component/*": ["component/*"],
+      "hook/*": ["hook/*"], 
+      "app/*": ["app/*"]
     },
     "plugins": [
       {
