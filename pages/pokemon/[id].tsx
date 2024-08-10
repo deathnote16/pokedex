@@ -10,6 +10,7 @@ import { usePokemonPayload } from 'hook';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react'; // Assuming you have this in your project
 
 const PokemonPage: NextPage = () => {
   const router = useRouter();
@@ -25,7 +26,12 @@ const PokemonPage: NextPage = () => {
 
   useEffect(() => {
     if (memoRouter) {
-      if (pokemonDetailsStatusError?.originalStatus === 404) {
+      // Check if the error is a FetchBaseQueryError and if the status is 404
+      if (
+        pokemonDetailsStatusError &&
+        'status' in pokemonDetailsStatusError &&
+        (pokemonDetailsStatusError as FetchBaseQueryError).status === 404
+      ) {
         router.push('/pokemon-not-found');
         return;
       }
@@ -36,7 +42,7 @@ const PokemonPage: NextPage = () => {
     getPokemonName,
     getPokemonUrl,
     memoRouter,
-    pokemonDetailsStatusError?.originalStatus,
+    pokemonDetailsStatusError,
     router
   ]);
 
