@@ -1,7 +1,5 @@
 {
-    "rewrites": [
-      { "source": "/pokemon/:id", "destination": "/pokemon/:id" },
-      { "source": "/test", "destination": "/test" }
-    ]
-  }
-  
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
