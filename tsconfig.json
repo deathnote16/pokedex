@@ -17,12 +17,12 @@
     "sourceMap": true,
     "inlineSources": true,
     "sourceRoot": "/",
-    "paths": {
-      "styles/*": ["styles/*"],
-      "component/*": ["component/*"],
-      "hook/*": ["hook/*"], 
-      "app/*": ["app/*"]
-    },
+    // "paths": {
+    //   "styles/*": ["styles/*"],
+    //   "component/*": ["component/*"],
+    //   "hook/*": ["hook/*"], 
+    //   "app/*": ["app/*"]
+    // },
     "plugins": [
       {
         "name": "next"
