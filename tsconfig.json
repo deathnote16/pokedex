@@ -17,10 +17,13 @@
     "sourceMap": true,
     "inlineSources": true,
     "sourceRoot": "/",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     // "paths": {
     //   "styles/*": ["styles/*"],
     //   "component/*": ["component/*"],
-    //   "hook/*": ["hook/*"], 
+    //   "hook/*": ["hook/*"],
     //   "app/*": ["app/*"]
     // },
     "plugins": [
