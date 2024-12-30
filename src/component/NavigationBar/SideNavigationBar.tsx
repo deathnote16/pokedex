@@ -66,7 +66,7 @@ const Component: FC<Props> = () => {
           onClick={() => onToggleShowPokemonList(true)}
         >
           <Image
-            src={'/images/icon/pokeball3.png' || ''}
+            src={'/images/icon/pokeball3.png'}
             alt="pokemon-img"
             width={20}
             height={20}
